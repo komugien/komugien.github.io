@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>こむぎえん 管理画面</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FFF9F0;
+  --soft-green: #6BBF59;
+  --deep-green: #3D8B37;
+  --earth-brown: #8B6F47;
+  --sunny-yellow: #FFD44D;
+  --soft-orange: #FF9F5B;
+  --bright-orange: #FF7B3A;
+  --poppy-red: #FF6B6B;
+  --sky-blue: #7ECBF0;
+  --text-dark: #3D3225;
+  --text-medium: #6B5D4F;
+  --text-light: #8F7E6D;
+  --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+/* ===== ヘッダー ===== */
+.admin-header {
+  background: var(--deep-green);
+  color: white;
+  padding: 16px 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+.admin-header h1 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.admin-header small {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+/* ===== ログイン ===== */
+.login-section {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 40px 24px;
+  text-align: center;
+}
+.login-section h2 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.3rem;
+  color: var(--deep-green);
+  margin-bottom: 8px;
+}
+.login-section p {
+  font-size: 0.85rem;
+  color: var(--text-medium);
+  margin-bottom: 24px;
+}
+.login-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e0d5c7;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  text-align: center;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.login-input:focus { border-color: var(--soft-green); }
+.login-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--soft-green);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.login-btn:hover { background: var(--deep-green); }
+.login-error {
+  color: var(--poppy-red);
+  font-size: 0.85rem;
+  margin-top: 12px;
+  display: none;
+}
+
+/* ===== メインコンテンツ ===== */
+.admin-main {
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+/* タブ */
+.tabs {
+  display: flex;
+  gap: 0;
+  margin: 16px 0;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.tab-btn {
+  flex: 1;
+  padding: 14px 8px;
+  border: none;
+  background: var(--white);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.tab-btn.active {
+  background: var(--soft-green);
+  color: white;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ===== カード ===== */
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.card h3 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--deep-green);
+  margin-bottom: 16px;
+}
+
+/* ===== フォーム ===== */
+.form-group {
+  margin-bottom: 16px;
+}
+.form-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-medium);
+  margin-bottom: 6px;
+}
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0d5c7;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.3s;
+  background: var(--white);
+  color: var(--text-dark);
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--soft-green);
+}
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.8;
+}
+
+/* 種類選択ボタン */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.category-btn {
+  padding: 12px 8px;
+  border: 2px solid #e0d5c7;
+  border-radius: 10px;
+  background: var(--white);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+}
+.category-btn.active {
+  border-color: var(--soft-green);
+  background: #e8f5e3;
+  color: var(--deep-green);
+}
+.category-btn[data-cat="event"].active {
+  border-color: var(--soft-orange);
+  background: #fff3e8;
+  color: var(--bright-orange);
+}
+.category-btn[data-cat="important"].active {
+  border-color: var(--poppy-red);
+  background: #ffe8e8;
+  color: var(--poppy-red);
+}
+
+/* 送信ボタン */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--soft-green);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 8px;
+}
+.submit-btn:hover { background: var(--deep-green); }
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ===== お知らせ一覧 ===== */
+.news-list { margin-top: 8px; }
+.news-item {
+  padding: 16px;
+  border-radius: 12px;
+  background: #f9f6f1;
+  margin-bottom: 10px;
+  position: relative;
+}
+.news-item-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.news-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  color: white;
+}
+.news-badge.normal { background: var(--soft-green); }
+.news-badge.event { background: var(--soft-orange); }
+.news-badge.important { background: var(--poppy-red); }
+.news-date {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+.news-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.news-content {
+  font-size: 0.82rem;
+  color: var(--text-medium);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+.news-delete {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.news-delete:hover { color: var(--poppy-red); }
+
+/* ===== 写真管理 ===== */
+.photo-guide {
+  text-align: center;
+  padding: 20px;
+}
+.photo-guide-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+.photo-guide p {
+  font-size: 0.88rem;
+  color: var(--text-medium);
+  margin-bottom: 16px;
+  line-height: 1.9;
+}
+.drive-btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background: #4285f4;
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+.drive-btn:hover { background: #3367d6; }
+
+.step-list {
+  text-align: left;
+  margin: 20px 0;
+}
+.step-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  align-items: flex-start;
+}
+.step-num {
+  width: 28px;
+  height: 28px;
+  background: var(--soft-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-text {
+  font-size: 0.88rem;
+  color: var(--text-medium);
+  padding-top: 3px;
+}
+
+/* ===== ステータス ===== */
+.status-msg {
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-top: 12px;
+  display: none;
+}
+.status-msg.success {
+  background: #e8f5e3;
+  color: var(--deep-green);
+  display: block;
+}
+.status-msg.error {
+  background: #ffe8e8;
+  color: var(--poppy-red);
+  display: block;
+}
+
+/* ===== 読み込み中 ===== */
+.loading {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-light);
+  font-size: 0.88rem;
+}
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--soft-green);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== セットアップ画面 ===== */
+.setup-section {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 0 16px;
+  display: none;
+}
+.setup-section .card { text-align: center; }
+.setup-section .form-input { text-align: left; font-size: 0.85rem; }
+
+/* ===== フッター ===== */
+.admin-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.72rem;
+  color: var(--text-light);
+}
+
+/* ===== 書式ツールバー ===== */
+.format-toolbar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.format-btn {
+  padding: 8px 14px;
+  border: 2px solid #e0d5c7;
+  border-radius: 8px;
+  background: var(--white);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.format-btn:hover {
+  border-color: var(--soft-green);
+  background: #f0f9ed;
+}
+.format-btn:active {
+  background: #e0f2db;
+  transform: scale(0.96);
+}
+.format-hint {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+/* ===== プレビュー ===== */
+.preview-area {
+  margin-top: 12px;
+  padding: 16px;
+  background: #f9f6f1;
+  border-radius: 10px;
+  min-height: 40px;
+  display: none;
+}
+.preview-area.show { display: block; }
+.preview-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--soft-green);
+  margin-bottom: 6px;
+}
+.preview-content {
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  line-height: 1.9;
+}
+.preview-content .fmt-bold { font-weight: 700; }
+.preview-content .fmt-large { font-size: 1.15em; font-weight: 700; }
+.preview-content .fmt-heading { font-size: 1.25em; font-weight: 800; color: var(--deep-green); display: block; margin: 4px 0; }
+
+/* ===== レスポンシブ ===== */
+@media (max-width: 480px) {
+  .category-grid { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .category-btn { padding: 10px 4px; font-size: 0.78rem; }
+  .card { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<div class="admin-header">
+  <h1>🌾 こむぎえん 管理画面</h1>
+  <small>お知らせ投稿・写真管理</small>
+</div>
+
+<!-- セットアップ画面（GAS URL未設定時） -->
+<div class="setup-section" id="setupSection">
+  <div class="card">
+    <h3>初期設定</h3>
+    <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 16px;">
+      管理システムのURLを入力してください。<br>
+      <small style="color: var(--text-light);">（Google Apps ScriptのウェブアプリURL）</small>
+    </p>
+    <div class="form-group">
+      <input type="text" id="gasUrlInput" class="form-input" placeholder="https://script.google.com/macros/s/...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Google Drive 写真フォルダID（任意）</label>
+      <input type="text" id="driveFolderInput" class="form-input" placeholder="フォルダIDを入力">
+    </div>
+    <button class="submit-btn" onclick="saveSetup()">設定を保存</button>
+  </div>
+</div>
+
+<!-- ログイン画面 -->
+<div class="login-section" id="loginSection">
+  <h2>🔑 ログイン</h2>
+  <p>管理用パスワードを入力してください</p>
+  <input type="password" class="login-input" id="passwordInput" placeholder="パスワード" onkeydown="if(event.key==='Enter')login()">
+  <button class="login-btn" onclick="login()">ログイン</button>
+  <div class="login-error" id="loginError">パスワードが違います</div>
+</div>
+
+<!-- メインコンテンツ -->
+<div class="admin-main" id="adminMain">
+  <!-- タブ -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('news')">📢 お知らせ</button>
+    <button class="tab-btn" onclick="switchTab('photos')">📷 写真</button>
+    <button class="tab-btn" onclick="switchTab('settings')">⚙️ 設定</button>
+  </div>
+
+  <!-- お知らせタブ -->
+  <div class="tab-content active" id="tab-news">
+    <!-- 投稿フォーム -->
+    <div class="card">
+      <h3>📝 お知らせを投稿</h3>
+      <form id="newsForm" onsubmit="submitNews(event)">
+        <div class="form-group">
+          <label class="form-label">種類</label>
+          <div class="category-grid">
+            <button type="button" class="category-btn active" data-cat="normal" onclick="selectCategory(this)">📋 お知らせ</button>
+            <button type="button" class="category-btn" data-cat="event" onclick="selectCategory(this)">🎉 イベント</button>
+            <button type="button" class="category-btn" data-cat="important" onclick="selectCategory(this)">⚠️ 重要</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">日付</label>
+          <input type="date" class="form-input" id="newsDate" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">タイトル</label>
+          <input type="text" class="form-input" id="newsTitle" placeholder="例：4月の保育予定について" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">内容</label>
+          <div class="format-toolbar">
+            <button type="button" class="format-btn" onclick="insertFormat('bold')" title="選択した文字を太くする"><b>B</b> 太字</button>
+            <button type="button" class="format-btn" onclick="insertFormat('large')" title="選択した文字を大きくする">🔤 大きい文字</button>
+            <button type="button" class="format-btn" onclick="insertFormat('heading')" title="選択した文字を見出しにする">📌 見出し</button>
+          </div>
+          <textarea class="form-textarea" id="newsContent" placeholder="お知らせの内容を入力してください" oninput="updatePreview()"></textarea>
+          <div class="format-hint">💡 文字を選択してからボタンを押すと装飾できます</div>
+          <div class="preview-area" id="previewArea">
+            <div class="preview-label">プレビュー</div>
+            <div class="preview-content" id="previewContent"></div>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">投稿する</button>
+      </form>
+      <div class="status-msg" id="submitStatus"></div>
+    </div>
+
+    <!-- お知らせ一覧 -->
+    <div class="card">
+      <h3>📋 投稿済みのお知らせ</h3>
+      <div id="newsList">
+        <div class="loading">読み込み中</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 写真タブ -->
+  <div class="tab-content" id="tab-photos">
+    <div class="card">
+      <div class="photo-guide">
+        <div class="photo-guide-icon">📸</div>
+        <h3 style="margin-bottom: 12px;">写真の追加・変更</h3>
+        <p>
+          Google ドライブの共有フォルダに<br>
+          写真をアップロードするだけで<br>
+          サイトに自動で反映されます
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-text">下のボタンからGoogleドライブを開く</div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-text">右下の「＋」ボタンから写真をアップロード</div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-text">しばらくするとサイトに反映されます</div>
+          </div>
+        </div>
+
+        <a id="driveLink" href="#" target="_blank" class="drive-btn">
+          📂 写真フォルダを開く
+        </a>
+        <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 12px;">
+          ※ Googleドライブアプリが開きます
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 設定タブ -->
+  <div class="tab-content" id="tab-settings">
+    <div class="card">
+      <h3>⚙️ 管理システム設定</h3>
+      <div class="form-group">
+        <label class="form-label">GAS ウェブアプリURL</label>
+        <input type="text" class="form-input" id="settingsGasUrl" placeholder="https://script.google.com/macros/s/...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Google Drive 写真フォルダID</label>
+        <input type="text" class="form-input" id="settingsDriveFolder" placeholder="フォルダIDを入力">
+      </div>
+      <div class="form-group">
+        <label class="form-label">管理パスワード変更</label>
+        <input type="text" class="form-input" id="settingsPassword" placeholder="新しいパスワード">
+        <small style="color: var(--text-light); font-size: 0.75rem;">※ GASのコード側も変更が必要です</small>
+      </div>
+      <button class="submit-btn" onclick="saveSettings()">設定を保存</button>
+      <div class="status-msg" id="settingsStatus"></div>
+    </div>
+
+    <div class="card">
+      <h3>🔗 よく使うリンク</h3>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a href="https://app.netlify.com/" target="_blank" style="display: block; padding: 14px 16px; background: #00ad9f; color: white; border-radius: 10px; text-decoration: none; font-weight: 700; text-align: center;">Netlify管理画面</a>
+        <a id="sheetLink" href="#" target="_blank" style="display: block; padding: 14px 16px; background: #0f9d58; color: white; border-radius: 10px; text-decoration: none; font-weight: 700; text-align: center;">Googleスプレッドシート</a>
+        <a href="/" style="display: block; padding: 14px 16px; background: var(--soft-green); color: white; border-radius: 10px; text-decoration: none; font-weight: 700; text-align: center;">サイトを見る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="admin-footer">
+  こむぎえん 管理システム
+</div>
+
+<script>
+// ===== 設定 =====
+const CONFIG_KEY = 'komugien_admin_config';
+let CONFIG = loadConfig();
+
+function loadConfig() {
+  const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbxvAZ2ElRj4DVmfVvt-SEauNqv52nMQr43i_nHs7LVrrKz_QExFFCn6cM-jg7s-DeHIqA/exec';
+  const saved = localStorage.getItem(CONFIG_KEY);
+  if (saved) {
+    const cfg = JSON.parse(saved);
+    // 古い仮URLが残っている場合は正しいURLに置き換え
+    if (cfg.gasUrl.includes('/demo')) {
+      cfg.gasUrl = DEFAULT_GAS_URL;
+      localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
+    }
+    return cfg;
+  }
+  return {
+    gasUrl: DEFAULT_GAS_URL,
+    driveFolderId: '',
+    password: 'komugien2026'
+  };
+}
+
+function saveConfig() {
+  localStorage.setItem(CONFIG_KEY, JSON.stringify(CONFIG));
+}
+
+// ===== 初期化 =====
+window.addEventListener('DOMContentLoaded', () => {
+  // 今日の日付をセット
+  document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
+
+  if (!CONFIG.gasUrl) {
+    // GAS URL未設定 → セットアップ画面
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('setupSection').style.display = 'block';
+  } else {
+    // URL設定済み → ログイン画面へ（セットアップスキップ）
+    document.getElementById('setupSection').style.display = 'none';
+  }
+});
+
+// ===== セットアップ =====
+function saveSetup() {
+  const gasUrl = document.getElementById('gasUrlInput').value.trim();
+  if (!gasUrl) {
+    alert('GASのURLを入力してください');
+    return;
+  }
+  CONFIG.gasUrl = gasUrl;
+  CONFIG.driveFolderId = document.getElementById('driveFolderInput').value.trim();
+  saveConfig();
+  document.getElementById('setupSection').style.display = 'none';
+  document.getElementById('loginSection').style.display = 'block';
+}
+
+// ===== ログイン =====
+function login() {
+  const pw = document.getElementById('passwordInput').value;
+  if (pw === CONFIG.password) {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('adminMain').style.display = 'block';
+    updateDriveLink();
+    loadSettings();
+    loadNews();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('passwordInput').value = '';
+    setTimeout(() => {
+      document.getElementById('loginError').style.display = 'none';
+    }, 3000);
+  }
+}
+
+// ===== タブ切り替え =====
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// ===== カテゴリ選択 =====
+let selectedCategory = 'normal';
+function selectCategory(btn) {
+  document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedCategory = btn.dataset.cat;
+}
+
+// ===== お知らせ投稿 =====
+async function submitNews(e) {
+  e.preventDefault();
+
+  const btn = document.getElementById('submitBtn');
+  const status = document.getElementById('submitStatus');
+  btn.disabled = true;
+  btn.textContent = '投稿中...';
+  status.className = 'status-msg';
+  status.style.display = 'none';
+
+  const categoryMap = { normal: 'お知らせ', event: 'イベント', important: '重要' };
+
+  const data = {
+    action: 'addNews',
+    password: CONFIG.password,
+    title: document.getElementById('newsTitle').value,
+    content: document.getElementById('newsContent').value,
+    category: categoryMap[selectedCategory],
+    date: document.getElementById('newsDate').value
+  };
+
+  try {
+    const res = await fetch(CONFIG.gasUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data),
+      redirect: 'follow'
+    });
+
+    status.textContent = '投稿しました！';
+    status.className = 'status-msg success';
+
+    // フォームリセット
+    document.getElementById('newsTitle').value = '';
+    document.getElementById('newsContent').value = '';
+    document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
+
+    // 一覧を更新
+    loadNews();
+  } catch (err) {
+    status.textContent = 'エラーが発生しました: ' + err.message;
+    status.className = 'status-msg error';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '投稿する';
+}
+
+// ===== お知らせ一覧読み込み =====
+async function loadNews() {
+  const container = document.getElementById('newsList');
+
+  if (!CONFIG.gasUrl) {
+    container.innerHTML = '<p style="text-align:center; color:var(--text-light); font-size:0.85rem;">GASのURLが設定されていません</p>';
+    return;
+  }
+
+  container.innerHTML = '<div class="loading">読み込み中</div>';
+
+  try {
+    const res = await fetch(CONFIG.gasUrl + '?action=getNews', { redirect: 'follow' });
+    const json = await res.json();
+
+    if (!json.news || json.news.length === 0) {
+      container.innerHTML = '<p style="text-align:center; color:var(--text-light); font-size:0.85rem; padding: 16px;">まだお知らせはありません</p>';
+      return;
+    }
+
+    const categoryClass = { 'お知らせ': 'normal', 'イベント': 'event', '重要': 'important' };
+
+    container.innerHTML = json.news.map(n => `
+      <div class="news-item">
+        <button class="news-delete" onclick="deleteNews(${n.row}, this)">削除</button>
+        <div class="news-item-header">
+          <span class="news-badge ${categoryClass[n.category] || 'normal'}">${n.category}</span>
+          <span class="news-date">${n.date}</span>
+        </div>
+        <div class="news-title">${escapeHtml(n.title)}</div>
+        ${n.content ? `<div class="news-content">${formatText(escapeHtml(n.content))}</div>` : ''}
+      </div>
+    `).join('');
+  } catch (err) {
+    container.innerHTML = '<p style="text-align:center; color:var(--poppy-red); font-size:0.85rem;">読み込みに失敗しました</p>';
+  }
+}
+
+// ===== お知らせ削除（非表示） =====
+async function deleteNews(row, btn) {
+  if (!confirm('このお知らせを非表示にしますか？')) return;
+
+  btn.textContent = '処理中...';
+
+  try {
+    await fetch(CONFIG.gasUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({
+        action: 'deleteNews',
+        password: CONFIG.password,
+        row: row
+      }),
+      redirect: 'follow'
+    });
+    loadNews();
+  } catch (err) {
+    alert('エラーが発生しました');
+    btn.textContent = '削除';
+  }
+}
+
+// ===== 設定 =====
+function loadSettings() {
+  document.getElementById('settingsGasUrl').value = CONFIG.gasUrl || '';
+  document.getElementById('settingsDriveFolder').value = CONFIG.driveFolderId || '';
+}
+
+function saveSettings() {
+  const status = document.getElementById('settingsStatus');
+  CONFIG.gasUrl = document.getElementById('settingsGasUrl').value.trim();
+  CONFIG.driveFolderId = document.getElementById('settingsDriveFolder').value.trim();
+  const newPw = document.getElementById('settingsPassword').value.trim();
+  if (newPw) CONFIG.password = newPw;
+  saveConfig();
+  updateDriveLink();
+  status.textContent = '設定を保存しました';
+  status.className = 'status-msg success';
+  setTimeout(() => { status.style.display = 'none'; }, 3000);
+}
+
+function updateDriveLink() {
+  const link = document.getElementById('driveLink');
+  if (CONFIG.driveFolderId) {
+    link.href = 'https://drive.google.com/drive/folders/' + CONFIG.driveFolderId;
+  } else {
+    link.href = 'https://drive.google.com/';
+  }
+}
+
+// ===== 書式ツールバー =====
+function insertFormat(type) {
+  const ta = document.getElementById('newsContent');
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  const text = ta.value;
+  const selected = text.substring(start, end);
+
+  const markers = {
+    bold: { open: '**', close: '**' },
+    large: { open: '{{', close: '}}' },
+    heading: { open: '##', close: '##' }
+  };
+
+  const m = markers[type];
+  if (!m) return;
+
+  if (selected) {
+    // 選択テキストがある場合 → 囲む
+    ta.value = text.substring(0, start) + m.open + selected + m.close + text.substring(end);
+    ta.selectionStart = start;
+    ta.selectionEnd = start + m.open.length + selected.length + m.close.length;
+  } else {
+    // 選択なし → マーカーを挿入してカーソルを中に
+    ta.value = text.substring(0, start) + m.open + m.close + text.substring(end);
+    ta.selectionStart = ta.selectionEnd = start + m.open.length;
+  }
+
+  ta.focus();
+  updatePreview();
+}
+
+// ===== プレビュー =====
+function updatePreview() {
+  const content = document.getElementById('newsContent').value;
+  const previewArea = document.getElementById('previewArea');
+  const previewContent = document.getElementById('previewContent');
+
+  if (!content.trim()) {
+    previewArea.classList.remove('show');
+    return;
+  }
+
+  previewArea.classList.add('show');
+  previewContent.innerHTML = formatText(escapeHtml(content));
+}
+
+function formatText(text) {
+  // 見出し: ##text##
+  text = text.replace(/##(.+?)##/g, '<span class="fmt-heading">$1</span>');
+  // 大きい文字: {{text}}
+  text = text.replace(/\{\{(.+?)\}\}/g, '<span class="fmt-large">$1</span>');
+  // 太字: **text**
+  text = text.replace(/\*\*(.+?)\*\*/g, '<span class="fmt-bold">$1</span>');
+  // 改行
+  text = text.replace(/\n/g, '<br>');
+  return text;
+}
+
+// ===== ユーティリティ =====
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+
+</body>
+</html>

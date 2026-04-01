@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>こむぎえん | 花小金井の認可外保育施設 - 自然のなかで遊びきる</title>
+<meta name="description" content="東京都小平市花小金井にある認可外保育施設「こむぎえん」。2歳児対象、週3日の少人数保育。自然体験と遊育を大切に、子どもの「好き」を一緒に見つけて伸ばす保育。春休み・夏休み・冬休みの一時預かりも実施中。見学随時受付中。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&family=Klee+One:wght@400;600&family=M+PLUS+Rounded+1c:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FFF9F0;
+  --warm-beige: #F5EBD8;
+  --soft-green: #6BBF59;
+  --deep-green: #3D8B37;
+  --leaf-green: #8ED47C;
+  --earth-brown: #8B6F47;
+  --light-brown: #C4A97D;
+  --sunny-yellow: #FFD44D;
+  --warm-yellow: #FFF0B3;
+  --soft-orange: #FF9F5B;
+  --bright-orange: #FF7B3A;
+  --pale-pink: #FFB8C1;
+  --sky-blue: #7ECBF0;
+  --light-blue: #D4EFFF;
+  --poppy-red: #FF6B6B;
+  --lavender: #C4A8E0;
+  --text-dark: #3D3225;
+  --text-medium: #6B5D4F;
+  --text-light: #8F7E6D;
+  --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255, 249, 240, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid rgba(107, 191, 89, 0.15);
+  transition: all 0.4s ease;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 10px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.nav-logo {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--deep-green); text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.nav-logo .wheat-icon { font-size: 1.3rem; }
+.nav-logo span {
+  display: block; font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 0.55rem; font-weight: 400; color: var(--text-light);
+  letter-spacing: 0.12em; margin-top: -2px;
+}
+
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--text-medium);
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em;
+  transition: color 0.3s ease; position: relative; padding: 4px 0;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0;
+  height: 3px; background: var(--sunny-yellow); border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--deep-green); }
+.nav-links a:hover::after { width: 100%; }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { width: 24px; height: 2.5px; background: var(--deep-green); border-radius: 2px; transition: all 0.3s ease; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  justify-content: center; position: relative; overflow: hidden;
+  background: linear-gradient(170deg, #E3F7D9 0%, #FFF9F0 40%, #FFF0B3 100%);
+}
+
+/* Floating decorative elements */
+.float-deco {
+  position: absolute; pointer-events: none; z-index: 1;
+}
+
+.float-leaf {
+  width: 30px; height: 30px;
+  animation: floatLeaf 8s ease-in-out infinite;
+}
+
+@keyframes floatLeaf {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(15px, -20px) rotate(15deg); }
+  50% { transform: translate(-10px, -35px) rotate(-10deg); }
+  75% { transform: translate(20px, -15px) rotate(20deg); }
+}
+
+.float-star {
+  width: 20px; height: 20px;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.3) rotate(180deg); }
+}
+
+/* Confetti-like shapes */
+.confetti {
+  position: absolute; pointer-events: none;
+  border-radius: 50%; opacity: 0.5;
+}
+
+.hero-content {
+  position: relative; z-index: 2; text-align: center;
+  padding: 100px 24px 60px; max-width: 850px;
+}
+
+.hero-illustration {
+  width: 100%; max-width: 750px; margin: 0 auto 32px;
+  aspect-ratio: 16/9;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(61,139,55,0.18), 0 4px 16px rgba(0,0,0,0.08);
+  border: 4px solid rgba(255,255,255,0.7);
+  position: relative;
+}
+
+.hero-illustration::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 40%, rgba(61,139,55,0.06) 100%);
+  pointer-events: none;
+}
+
+.hero-illustration svg { width: 100%; height: auto; }
+
+.hero-illustration img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  display: block;
+}
+
+.policy-visual img, .feature-photo img, .temp-care-visual img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 20px;
+}
+
+.feature-photo {
+  width: 100%; aspect-ratio: 16/10; border-radius: 20px;
+  overflow: hidden; margin-bottom: 20px;
+}
+
+.hero-catch {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 900; color: var(--deep-green);
+  line-height: 1.5; margin-bottom: 8px;
+  opacity: 0; animation: bounceUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+}
+
+.hero-catch .highlight {
+  color: var(--bright-orange);
+  display: inline-block;
+  animation: wiggle 2s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+.hero-sub {
+  font-size: clamp(0.88rem, 2vw, 1.05rem);
+  color: var(--text-medium); font-weight: 400;
+  line-height: 2; margin-bottom: 32px;
+  opacity: 0; animation: bounceUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
+}
+
+.hero-badges {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: bounceUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s forwards;
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 22px; border-radius: 50px;
+  font-size: 0.82rem; font-weight: 700;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease;
+}
+.badge:hover { transform: translateY(-3px) scale(1.03); }
+
+.badge.green { background: var(--soft-green); color: white; }
+.badge.orange { background: var(--soft-orange); color: white; }
+.badge.blue { background: var(--sky-blue); color: white; }
+.badge.pink { background: var(--pale-pink); color: white; }
+
+@keyframes bounceUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.scroll-hint {
+  position: absolute; bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0; animation: bounceUp 0.8s ease 1.3s forwards;
+}
+.scroll-hint span { font-size: 0.65rem; color: var(--text-light); letter-spacing: 0.2em; font-weight: 700; }
+.scroll-arrow {
+  width: 20px; height: 20px;
+  border-right: 2px solid var(--soft-green);
+  border-bottom: 2px solid var(--soft-green);
+  transform: rotate(45deg);
+  animation: scrollBounce 2s ease infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: rotate(45deg) translate(0,0); opacity: 1; }
+  50% { transform: rotate(45deg) translate(5px, 5px); opacity: 0.4; }
+}
+
+/* ===== SECTION COMMON ===== */
+section { padding: 90px 24px; }
+
+.section-label {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.3em;
+  color: var(--soft-green); text-transform: uppercase;
+  font-weight: 800; margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800; color: var(--deep-green);
+  margin-bottom: 14px; line-height: 1.5;
+}
+
+.section-title .emoji {
+  display: inline-block;
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.section-desc {
+  font-size: 0.95rem; color: var(--text-medium);
+  max-width: 600px; line-height: 2; font-weight: 400;
+}
+
+/* ===== FEATURES ===== */
+.features {
+  background: var(--white); position: relative; overflow: hidden;
+}
+
+.features::before {
+  content: ''; position: absolute; top: -40px; left: -40px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: var(--warm-yellow); opacity: 0.3;
+}
+
+.features::after {
+  content: ''; position: absolute; bottom: -60px; right: -60px;
+  width: 250px; height: 250px; border-radius: 50%;
+  background: var(--light-blue); opacity: 0.25;
+}
+
+.features-header { text-align: center; margin-bottom: 50px; position: relative; z-index: 1; }
+.features-header .section-desc { margin: 0 auto; }
+
+.features-grid {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  position: relative; z-index: 1;
+}
+
+.feature-card {
+  text-align: center; padding: 36px 24px; border-radius: 24px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative; overflow: hidden; border: 2px solid transparent;
+}
+
+.feature-card:nth-child(1) { background: linear-gradient(160deg, #E8FFE0, #F0FFE8); border-color: rgba(107,191,89,0.2); }
+.feature-card:nth-child(2) { background: linear-gradient(160deg, #FFF3E0, #FFF8EE); border-color: rgba(255,159,91,0.2); }
+.feature-card:nth-child(3) { background: linear-gradient(160deg, #E0F4FF, #EDF9FF); border-color: rgba(126,203,240,0.2); }
+
+.feature-card:hover {
+  transform: translateY(-8px) rotate(-1deg);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+.feature-icon {
+  width: 90px; height: 90px; margin: 0 auto 20px;
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; position: relative;
+}
+
+.feature-icon::after {
+  content: ''; position: absolute; inset: -4px;
+  border-radius: 50%; border: 2px dashed rgba(0,0,0,0.08);
+  animation: spinSlow 20s linear infinite;
+}
+
+@keyframes spinSlow { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+.feature-icon svg { width: 50px; height: 50px; }
+
+.feature-card h3 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.15rem; font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.feature-card:nth-child(1) h3 { color: var(--deep-green); }
+.feature-card:nth-child(2) h3 { color: var(--bright-orange); }
+.feature-card:nth-child(3) h3 { color: #3A9BC7; }
+
+.feature-card p { font-size: 0.88rem; color: var(--text-medium); line-height: 1.9; font-weight: 400; }
+
+/* ===== ABOUT ===== */
+.about { background: var(--cream); }
+
+.about-inner { max-width: 1000px; margin: 0 auto; }
+.about-header { text-align: center; margin-bottom: 50px; }
+.about-header .section-desc { margin: 0 auto; }
+
+.policy-cards { display: flex; flex-direction: column; gap: 28px; }
+
+.policy-card {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 36px; align-items: center;
+  background: var(--white); border-radius: 28px; padding: 44px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+  transition: transform 0.4s ease;
+  border-left: 5px solid var(--soft-green);
+}
+
+.policy-card:nth-child(2) { border-left-color: var(--soft-orange); }
+.policy-card:nth-child(even) { direction: rtl; }
+.policy-card:nth-child(even) > * { direction: ltr; }
+
+.policy-card:hover { transform: translateX(6px); }
+
+.policy-visual {
+  aspect-ratio: 4/3; border-radius: 20px;
+  overflow: hidden; display: flex; align-items: center;
+  justify-content: center;
+}
+
+.policy-visual svg { width: 100%; height: 100%; }
+
+.policy-text h3 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.3rem; font-weight: 800;
+  color: var(--deep-green); margin-bottom: 14px;
+}
+
+.policy-card:nth-child(2) .policy-text h3 { color: var(--bright-orange); }
+
+.policy-text p { font-size: 0.9rem; color: var(--text-medium); line-height: 2; font-weight: 400; }
+
+/* ===== DAILY FLOW ===== */
+.daily { background: var(--white); position: relative; overflow: hidden; }
+
+.daily::before {
+  content: ''; position: absolute; top: 50%; right: -100px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: var(--warm-yellow); opacity: 0.15;
+}
+
+.daily-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+.daily-header { text-align: center; margin-bottom: 50px; }
+.daily-header .section-desc { margin: 0 auto; }
+
+.timeline { position: relative; padding-left: 70px; }
+
+.timeline::before {
+  content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+  width: 4px; border-radius: 2px;
+  background: linear-gradient(to bottom, var(--soft-green), var(--sunny-yellow), var(--soft-orange), var(--sky-blue), var(--pale-pink));
+}
+
+.timeline-item {
+  position: relative; margin-bottom: 28px;
+  padding: 22px 28px; border-radius: 20px;
+  transition: transform 0.3s ease;
+}
+
+.timeline-item:nth-child(1) { background: linear-gradient(135deg, #E8FFE0, #F5FFF0); }
+.timeline-item:nth-child(2) { background: linear-gradient(135deg, #FFF8E0, #FFFCF0); }
+.timeline-item:nth-child(3) { background: linear-gradient(135deg, #FFF3E0, #FFF8F0); }
+.timeline-item:nth-child(4) { background: linear-gradient(135deg, #E0F4FF, #F0FAFF); }
+.timeline-item:nth-child(5) { background: linear-gradient(135deg, #FFE8EB, #FFF2F4); }
+
+.timeline-item:hover { transform: translateX(6px); }
+
+.timeline-dot {
+  position: absolute; left: -50px; top: 24px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--white); border: 4px solid var(--soft-green);
+  box-shadow: 0 0 0 4px rgba(107,191,89,0.15);
+  transition: transform 0.3s ease;
+}
+
+.timeline-item:hover .timeline-dot { transform: scale(1.3); }
+
+.timeline-time {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 0.82rem; font-weight: 800;
+  letter-spacing: 0.1em; margin-bottom: 2px;
+}
+
+.timeline-item:nth-child(1) .timeline-time { color: var(--deep-green); }
+.timeline-item:nth-child(2) .timeline-time { color: #D4A017; }
+.timeline-item:nth-child(3) .timeline-time { color: var(--bright-orange); }
+.timeline-item:nth-child(4) .timeline-time { color: #3A9BC7; }
+.timeline-item:nth-child(5) .timeline-time { color: #E06080; }
+
+.timeline-item:nth-child(2) .timeline-dot { border-color: var(--sunny-yellow); box-shadow: 0 0 0 4px rgba(255,212,77,0.15); }
+.timeline-item:nth-child(3) .timeline-dot { border-color: var(--soft-orange); box-shadow: 0 0 0 4px rgba(255,159,91,0.15); }
+.timeline-item:nth-child(4) .timeline-dot { border-color: var(--sky-blue); box-shadow: 0 0 0 4px rgba(126,203,240,0.15); }
+.timeline-item:nth-child(5) .timeline-dot { border-color: var(--pale-pink); box-shadow: 0 0 0 4px rgba(255,184,193,0.15); }
+
+.timeline-title { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+.timeline-desc { font-size: 0.82rem; color: var(--text-light); font-weight: 400; }
+.timeline-emoji { font-size: 1.3rem; float: right; margin-top: -8px; }
+
+/* ===== MESSAGE ===== */
+.message {
+  background: linear-gradient(170deg, #FFF9F0 0%, #E3F7D9 50%, #FFF0B3 100%);
+  position: relative; overflow: hidden;
+}
+
+.message-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+.message-header { margin-bottom: 36px; }
+
+.message-card {
+  background: var(--white); border-radius: 28px;
+  padding: 48px; box-shadow: 0 8px 40px rgba(0,0,0,0.05);
+  position: relative; border: 2px solid rgba(107,191,89,0.15);
+}
+
+.message-card::before {
+  content: '\201C'; position: absolute; top: 16px; left: 28px;
+  font-size: 5rem; color: var(--soft-green); opacity: 0.15;
+  font-family: Georgia, serif; line-height: 1;
+}
+
+.message-icon {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--sunny-yellow), var(--soft-orange));
+  margin: 0 auto 24px; display: flex; align-items: center;
+  justify-content: center; box-shadow: 0 4px 16px rgba(255,159,91,0.25);
+}
+.message-icon svg { width: 44px; height: 44px; }
+
+.message-text {
+  font-size: 0.95rem; color: var(--text-medium);
+  line-height: 2.2; font-weight: 400; text-align: left; margin-bottom: 24px;
+}
+
+.message-name { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 0.95rem; color: var(--deep-green); font-weight: 800; }
+.message-role { font-size: 0.75rem; color: var(--text-light); font-weight: 400; }
+
+/* ===== TEMPORARY CARE (一時預かり) ===== */
+.temp-care {
+  background: linear-gradient(170deg, #FFF9F0 0%, #FFECD2 50%, #FFF0B3 100%);
+  position: relative; overflow: hidden;
+}
+
+.temp-care-inner { max-width: 900px; margin: 0 auto; }
+.temp-care-header { text-align: center; margin-bottom: 40px; }
+.temp-care-header .section-desc { margin: 0 auto; }
+
+.temp-care-card {
+  background: var(--white); border-radius: 28px; padding: 48px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.05);
+  border: 2px solid rgba(255,159,91,0.2);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+}
+
+.temp-care-visual {
+  text-align: center;
+}
+
+.temp-care-visual svg { width: 100%; max-width: 300px; height: auto; }
+
+.temp-care-text h3 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.3rem; font-weight: 800;
+  color: var(--bright-orange); margin-bottom: 16px;
+}
+
+.temp-care-text p {
+  font-size: 0.9rem; color: var(--text-medium); line-height: 2; font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.temp-care-badges {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+
+.temp-care-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 700;
+  background: linear-gradient(135deg, #FFF3E0, #FFE8CC);
+  color: var(--bright-orange);
+  border: 1px solid rgba(255,123,58,0.2);
+}
+
+/* ===== VOICES (保護者の声) ===== */
+.voices { background: var(--cream); position: relative; overflow: hidden; }
+
+.voices::before {
+  content: ''; position: absolute; bottom: -80px; left: -80px;
+  width: 250px; height: 250px; border-radius: 50%;
+  background: var(--pale-pink); opacity: 0.15;
+}
+
+.voices-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+.voices-header { text-align: center; margin-bottom: 50px; }
+.voices-header .section-desc { margin: 0 auto; }
+
+.voices-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+
+.voice-card {
+  background: var(--white); border-radius: 24px; padding: 32px 28px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  border: 2px solid transparent;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+}
+
+.voice-card:nth-child(1) { border-color: rgba(107,191,89,0.15); }
+.voice-card:nth-child(2) { border-color: rgba(255,159,91,0.15); }
+.voice-card:nth-child(3) { border-color: rgba(126,203,240,0.15); }
+
+.voice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+}
+
+.voice-card::before {
+  content: '\201C'; position: absolute; top: 12px; left: 20px;
+  font-size: 3rem; font-family: Georgia, serif;
+  opacity: 0.1; line-height: 1;
+}
+
+.voice-card:nth-child(1)::before { color: var(--soft-green); }
+.voice-card:nth-child(2)::before { color: var(--soft-orange); }
+.voice-card:nth-child(3)::before { color: var(--sky-blue); }
+
+.voice-stars {
+  display: flex; gap: 2px; margin-bottom: 12px;
+  font-size: 1rem; color: var(--sunny-yellow);
+}
+
+.voice-text {
+  font-size: 0.88rem; color: var(--text-medium);
+  line-height: 1.9; font-weight: 400; margin-bottom: 16px;
+}
+
+.voice-meta {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.voice-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+
+.voice-card:nth-child(1) .voice-avatar { background: linear-gradient(135deg, #E0FFD9, #C8F5BE); }
+.voice-card:nth-child(2) .voice-avatar { background: linear-gradient(135deg, #FFF3E0, #FFE8CC); }
+.voice-card:nth-child(3) .voice-avatar { background: linear-gradient(135deg, #D4EFFF, #B8E4FF); }
+
+.voice-info .voice-name {
+  font-size: 0.8rem; font-weight: 700; color: var(--text-dark);
+}
+.voice-info .voice-detail {
+  font-size: 0.7rem; color: var(--text-light); font-weight: 400;
+}
+
+/* ===== ADMISSION ===== */
+.admission { background: var(--white); }
+
+.admission-inner { max-width: 900px; margin: 0 auto; }
+.admission-header { text-align: center; margin-bottom: 50px; }
+.admission-header .section-desc { margin: 0 auto; }
+
+.info-table {
+  width: 100%; margin-bottom: 40px; border-collapse: separate;
+  border-spacing: 0; border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+.info-table tr { border-bottom: 1px solid rgba(107,191,89,0.1); }
+.info-table tr:last-child { border-bottom: none; }
+.info-table th {
+  background: var(--deep-green); color: var(--white);
+  font-weight: 700; font-size: 0.85rem;
+  padding: 16px 24px; text-align: left; width: 150px;
+  letter-spacing: 0.05em; vertical-align: top;
+}
+.info-table td {
+  background: #F5FFF0; padding: 16px 24px;
+  font-size: 0.9rem; color: var(--text-dark);
+  font-weight: 400; line-height: 1.8;
+}
+.info-table td small { display: block; color: var(--text-light); font-size: 0.78rem; margin-top: 4px; }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+
+.contact-card {
+  padding: 28px; border-radius: 20px; text-align: center;
+  transition: transform 0.3s ease; border: 2px solid transparent;
+}
+.contact-card:hover { transform: translateY(-4px); }
+
+.contact-card.phone {
+  background: linear-gradient(135deg, #E0FFD9, #C8F5BE);
+  border-color: rgba(107,191,89,0.2);
+}
+.contact-card.email {
+  background: linear-gradient(135deg, #FFF3E0, #FFE8CC);
+  border-color: rgba(255,159,91,0.2);
+}
+
+.contact-card .label { font-size: 0.72rem; color: var(--text-light); letter-spacing: 0.15em; margin-bottom: 6px; font-weight: 700; }
+.contact-card .value { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--deep-green); }
+.contact-card .value.small { font-size: 0.95rem; }
+.contact-card.email .value { color: var(--bright-orange); }
+.contact-card .sub { font-size: 0.78rem; color: var(--text-light); margin-top: 4px; }
+
+/* Instagram DM card */
+.contact-card.ig {
+  background: linear-gradient(135deg, #FFEEF5, #F5E0FF);
+  border-color: rgba(225,48,108,0.15);
+}
+.contact-card.ig .value { color: #E1306C; }
+
+/* Inquiry Form */
+.inquiry-form {
+  background: var(--white); border-radius: 28px; padding: 40px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+  border: 2px solid rgba(107,191,89,0.15);
+  margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;
+}
+
+.inquiry-title {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.2rem; font-weight: 800; color: var(--deep-green);
+  text-align: center; margin-bottom: 6px;
+}
+
+.inquiry-desc {
+  font-size: 0.82rem; color: var(--text-light); text-align: center;
+  margin-bottom: 24px;
+}
+
+.inquiry-type-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  margin-bottom: 20px;
+}
+
+.inquiry-type-btn {
+  cursor: pointer; display: block;
+}
+
+.inquiry-type-btn input { display: none; }
+
+.inquiry-type-btn span {
+  display: block; text-align: center;
+  padding: 12px 16px; border-radius: 14px;
+  font-size: 0.85rem; font-weight: 700;
+  background: var(--cream); color: var(--text-medium);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.inquiry-type-btn input:checked + span {
+  background: linear-gradient(135deg, #E8FFE0, #D4F5C4);
+  color: var(--deep-green);
+  border-color: var(--soft-green);
+  box-shadow: 0 2px 12px rgba(107,191,89,0.15);
+}
+
+.inquiry-type-btn:hover span {
+  border-color: rgba(107,191,89,0.3);
+}
+
+.inquiry-fields {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-bottom: 20px;
+}
+
+.inquiry-input {
+  width: 100%; padding: 14px 18px; border-radius: 14px;
+  border: 2px solid rgba(107,191,89,0.15);
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 0.9rem; color: var(--text-dark);
+  background: var(--cream);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.inquiry-input:focus {
+  border-color: var(--soft-green);
+  box-shadow: 0 0 0 3px rgba(107,191,89,0.1);
+}
+
+.inquiry-input::placeholder { color: var(--text-light); }
+
+.inquiry-textarea { resize: vertical; min-height: 70px; }
+
+.inquiry-submit {
+  width: 100%; padding: 16px;
+  background: linear-gradient(135deg, var(--soft-green), var(--deep-green));
+  color: white; border: none; border-radius: 50px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1rem; font-weight: 800;
+  cursor: pointer; transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(61,139,55,0.25);
+}
+
+.inquiry-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(61,139,55,0.35);
+}
+
+.inquiry-note {
+  font-size: 0.72rem; color: var(--text-light);
+  text-align: center; margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .inquiry-type-grid { grid-template-columns: 1fr 1fr; }
+  .inquiry-form { padding: 28px 20px; }
+}
+
+.instagram-cta {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; padding: 18px 36px;
+  background: linear-gradient(135deg, #F56040, #E1306C, #833AB4);
+  border-radius: 50px; text-decoration: none; color: var(--white);
+  font-weight: 700; font-size: 0.9rem; max-width: 360px;
+  margin: 0 auto 40px; transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(225,48,108,0.25);
+}
+.instagram-cta:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 30px rgba(225,48,108,0.35); }
+.instagram-cta svg { width: 20px; height: 20px; }
+
+.map-container { border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 3px solid rgba(107,191,89,0.15); }
+.map-container iframe { width: 100%; height: 300px; border: none; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: linear-gradient(135deg, var(--deep-green), #2D6B28);
+  color: rgba(255,255,255,0.85); padding: 48px 24px 32px; text-align: center;
+  position: relative; overflow: hidden;
+}
+footer::before {
+  content: ''; position: absolute; top: -50px; right: -50px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.footer-logo {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.3rem; font-weight: 800; color: white; margin-bottom: 14px;
+}
+.footer-info { font-size: 0.78rem; line-height: 2; opacity: 0.7; margin-bottom: 20px; }
+.footer-copy { font-size: 0.68rem; opacity: 0.4; }
+
+/* ===== BUBBLE GALLERY ===== */
+.bubble-gallery {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start;
+  gap: 28px; max-width: 1100px; margin: 0 auto;
+}
+
+.bubble {
+  width: 300px;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  padding: 32px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  position: relative;
+  background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0.05) 70%);
+  border: 3px solid rgba(255,255,255,0.6);
+  box-shadow:
+    0 8px 40px rgba(0,0,0,0.06),
+    inset 0 0 30px rgba(255,255,255,0.5),
+    0 0 0 1px rgba(107,191,89,0.08);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+  animation: bubbleFloat var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.bubble:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 14px 50px rgba(0,0,0,0.1),
+    inset 0 0 30px rgba(255,255,255,0.5),
+    0 0 0 1px rgba(107,191,89,0.12);
+}
+
+/* Bubble highlight / light reflection */
+.bubble::before {
+  content: ''; position: absolute; top: 8%; left: 18%;
+  width: 30%; height: 18%; border-radius: 50%;
+  background: linear-gradient(160deg, rgba(255,255,255,0.7), rgba(255,255,255,0));
+  transform: rotate(-20deg);
+  pointer-events: none; z-index: 2;
+}
+
+.bubble-photo {
+  width: 120px; height: 120px; border-radius: 50%; overflow: hidden;
+  margin-bottom: 10px; flex-shrink: 0;
+  border: 3px solid rgba(255,255,255,0.8);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.bubble-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+.bubble h3 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 0.95rem; font-weight: 800;
+  margin-bottom: 6px; line-height: 1.3;
+}
+
+.bubble p {
+  font-size: 0.75rem; color: var(--text-medium);
+  line-height: 1.7; font-weight: 400;
+}
+
+@keyframes bubbleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Stagger rows for organic feel */
+.bubble:nth-child(odd) { margin-top: 0; }
+.bubble:nth-child(even) { margin-top: 40px; }
+
+@media (max-width: 768px) {
+  .bubble { width: 260px; padding: 28px; }
+  .bubble-photo { width: 100px; height: 100px; }
+  .bubble:nth-child(even) { margin-top: 0; }
+  .bubble-gallery { gap: 20px; }
+  .bubble h3 { font-size: 0.88rem; }
+  .bubble p { font-size: 0.72rem; }
+}
+
+/* ===== ANIMATIONS ===== */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute;
+    top: 100%; left: 0; right: 0; background: rgba(255,249,240,0.98);
+    padding: 20px 24px; gap: 16px; border-bottom: 2px solid rgba(107,191,89,0.15);
+  }
+  .features-grid { grid-template-columns: 1fr; gap: 20px; }
+  .policy-card { grid-template-columns: 1fr; padding: 28px 20px; }
+  .policy-card:nth-child(even) { direction: ltr; }
+  .contact-grid { grid-template-columns: 1fr !important; }
+  .message-card { padding: 32px 20px; }
+  section { padding: 70px 20px; }
+  .hero-badges { flex-direction: column; align-items: center; }
+  .voices-grid { grid-template-columns: 1fr; }
+  .temp-care-card { grid-template-columns: 1fr; padding: 28px 20px; }
+}
+
+/* ===== NEWS (お知らせ) ===== */
+.news-section {
+  background: var(--white);
+  padding: 0 24px 20px;
+  position: relative;
+}
+.news-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+.news-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.news-header h2 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--deep-green);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.news-header .section-label-sm {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--soft-green);
+  font-weight: 800;
+}
+.news-list-public {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.news-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--cream);
+  border-radius: 14px;
+  border-left: 4px solid var(--soft-green);
+  transition: transform 0.3s ease;
+}
+.news-card:hover { transform: translateX(4px); }
+.news-card.event { border-left-color: var(--soft-orange); }
+.news-card.important { border-left-color: var(--poppy-red); }
+.news-card-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-light);
+  white-space: nowrap;
+  min-width: 70px;
+  padding-top: 2px;
+}
+.news-card-body { flex: 1; }
+.news-card-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: white;
+  margin-bottom: 4px;
+}
+.news-card-badge.normal { background: var(--soft-green); }
+.news-card-badge.event { background: var(--soft-orange); }
+.news-card-badge.important { background: var(--poppy-red); }
+.news-card-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+.news-card-content {
+  font-size: 0.8rem;
+  color: var(--text-medium);
+  line-height: 1.7;
+}
+.news-card-content .fmt-bold { font-weight: 700; }
+.news-card-content .fmt-large { font-size: 1.15em; font-weight: 700; }
+.news-card-content .fmt-heading { font-size: 1.2em; font-weight: 800; color: var(--deep-green); display: block; margin: 4px 0; }
+.news-empty {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+.news-toggle {
+  background: none;
+  border: none;
+  color: var(--soft-green);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 4px;
+}
+.news-toggle:hover { color: var(--deep-green); }
+@media (max-width: 768px) {
+  .news-card { flex-direction: column; gap: 4px; }
+  .news-card-date { min-width: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="wheat-icon">🌾</span>
+      <div>こむぎえん<span>花小金井の認可外保育施設</span></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">特徴</a></li>
+      <li><a href="#about">保育方針</a></li>
+      <li><a href="#daily">1日のながれ</a></li>
+      <li><a href="#handmade">園の日常</a></li>
+      <li><a href="#voices">保護者の声</a></li>
+      <li><a href="#admission">入園案内</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <!-- Floating decorations -->
+  <svg class="float-deco" style="top:12%;left:8%;opacity:0.5" width="35" height="35" viewBox="0 0 35 35">
+    <path d="M17.5 2C15 8 8 15 2 17.5C8 20 15 27 17.5 33C20 27 27 20 33 17.5C27 15 20 8 17.5 2Z" fill="#FFD44D"/>
+  </svg>
+  <svg class="float-deco" style="top:25%;right:12%;opacity:0.4;animation:floatLeaf 6s ease-in-out infinite" width="40" height="25" viewBox="0 0 40 25">
+    <ellipse cx="20" cy="12" rx="18" ry="10" fill="#8ED47C" transform="rotate(-15 20 12)"/>
+    <line x1="5" y1="15" x2="35" y2="9" stroke="#6BBF59" stroke-width="1"/>
+  </svg>
+  <svg class="float-deco" style="top:60%;left:5%;opacity:0.35;animation:floatLeaf 10s ease-in-out infinite" width="30" height="30" viewBox="0 0 30 30">
+    <circle cx="15" cy="15" r="12" fill="#FFB8C1"/>
+  </svg>
+  <svg class="float-deco" style="top:70%;right:8%;opacity:0.4;animation:floatLeaf 7s ease-in-out 2s infinite" width="28" height="28" viewBox="0 0 28 28">
+    <path d="M14 1C12 6 6 12 1 14C6 16 12 22 14 27C16 22 22 16 27 14C22 12 16 6 14 1Z" fill="#7ECBF0"/>
+  </svg>
+  <div class="confetti" style="width:15px;height:15px;background:var(--sunny-yellow);top:15%;left:25%;animation:floatLeaf 9s ease-in-out 1s infinite;border-radius:3px;transform:rotate(45deg);"></div>
+  <div class="confetti" style="width:12px;height:12px;background:var(--pale-pink);top:40%;right:20%;animation:floatLeaf 8s ease-in-out 3s infinite;"></div>
+  <div class="confetti" style="width:10px;height:10px;background:var(--lavender);bottom:25%;left:15%;animation:floatLeaf 11s ease-in-out 2s infinite;border-radius:2px;"></div>
+
+  <div class="hero-content">
+    <div class="hero-illustration">
+      <img src="images/IMG_7972.JPG" alt="こむぎえんの園児たちがワゴンを元気に押して遊ぶ様子" loading="eager">
+    </div>
+
+    <h1 class="hero-catch">
+      泥んこになって、<span class="highlight">遊びきる！</span><br>
+      元気いっぱい、のびのび育つ場所。
+    </h1>
+    <p class="hero-sub">
+      西武新宿線 花小金井駅から徒歩7分、2016年に開園した少人数制の認可外保育施設です。<br>
+      ベテラン保育者2名が子どもたちの「やってみたい！」を大切に、ひとりひとりに寄り添った保育をしています。<br>
+      晴れた日は小金井公園へ。自然を肌で感じ、思いっきり遊びます！
+    </p>
+    <div class="hero-badges">
+      <div class="badge green">🌿 自然体験たっぷり</div>
+      <div class="badge orange">🧡「好き」を一緒に見つける</div>
+      <div class="badge pink">🌻 長期休暇の一時預かりOK</div>
+      <div class="badge blue">👀 見学随時OK！</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- お知らせ -->
+<section class="news-section" id="news-section" style="display:none;">
+  <div class="news-container reveal">
+    <div class="news-header">
+      <h2>📢 お知らせ</h2>
+      <button class="news-toggle" id="newsToggle" onclick="toggleNewsExpand()" style="display:none;">すべて見る</button>
+    </div>
+    <div class="news-list-public" id="newsListPublic">
+      <div class="news-empty">お知らせを読み込み中...</div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="features-header reveal">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">こむぎえんの3つの特徴 <span class="emoji">✨</span></h2>
+    <p class="section-desc">2016年開園、保育歴30年のベテラン先生が少人数で手厚く見守ります。</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-photo">
+        <img src="images/IMG_7971.JPG" alt="青空の下、広い原っぱで園児たちがワゴンを押して遊ぶ様子" loading="lazy">
+      </div>
+      <h3>とことん「遊びきる」🌱</h3>
+      <p>子どもの「してみたい！」という好奇心が出発点。満足するまで夢中で遊べる環境を整えています。</p>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay: 0.15s;">
+      <div class="feature-photo">
+        <img src="images/IMG_7992.JPG" alt="園児たちがピアノを一緒に弾いて楽しむ様子" loading="lazy">
+      </div>
+      <h3>「好き」を見つけて伸ばす 🧡</h3>
+      <p>2歳はまだ「好き」が見つかる途中。先生が一人ひとりに寄り添い、夢中になれることを一緒に探します。見つけた「好き」をとことん伸ばす少人数保育です。</p>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay: 0.3s;">
+      <div class="feature-photo">
+        <img src="images/IMG_7973.JPG" alt="赤帽子をかぶった園児たちが草むらの丘を探検する様子" loading="lazy">
+      </div>
+      <h3>自然が最高の遊び場 🌳</h3>
+      <p>園から歩いてすぐの小金井公園が遊びのフィールド。晴れた日は公園で泥んこ遊び、虫取り、丘の探検。雨の日は室内で工作やごっこ遊び。毎日いろんな体験が待っています！</p>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-header reveal">
+      <div class="section-label">Policy</div>
+      <h2 class="section-title">こむぎえんの保育方針 <span class="emoji">🌾</span></h2>
+      <p class="section-desc">「遊育」と「居場所づくり」を軸に、子どもたちの"いま"を全力で応援します。</p>
+    </div>
+
+    <div class="policy-cards">
+      <div class="policy-card reveal">
+        <div class="policy-visual">
+          <img src="images/IMG_7974.JPG" alt="草むらの丘を探検する園児たち" loading="lazy">
+        </div>
+        <div class="policy-text">
+          <h3>🌱「遊育」— 遊びきるチカラ</h3>
+          <p>決められたカリキュラムをこなすのではなく、子ども自身が「今、何をしたいか」を選び、とことん没頭する。夢中になった先に、自分で考え行動する力が芽生えます。それが「遊育」です。</p>
+        </div>
+      </div>
+
+      <div class="policy-card reveal">
+        <div class="policy-visual">
+          <img src="images/IMG_7975.JPG" alt="広い芝生の公園で先生と一緒に走る園児たち" loading="lazy">
+        </div>
+        <div class="policy-text">
+          <h3>🏠 居場所づくり — 「好き」を一緒に探す保育</h3>
+          <p>わんぱくでも、おとなしくても大丈夫。どんな気持ちも否定せず受け止め、安心して「自分」を出せる第2のおうちを目指しています。「この子は何に夢中になるんだろう？」を先生と一緒に探しながら、見つけた「好き」をとことん伸ばします。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Daily -->
+<section class="daily" id="daily">
+  <div class="daily-inner">
+    <div class="daily-header reveal">
+      <div class="section-label">Daily Schedule</div>
+      <h2 class="section-title">1日のながれ <span class="emoji">⏰</span></h2>
+      <p class="section-desc">毎日が冒険！こむぎえんの1日をご紹介します。</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <span class="timeline-emoji">🌞</span>
+        <div class="timeline-time">09:00</div>
+        <div class="timeline-title">登園・自由あそび</div>
+        <div class="timeline-desc">「おはよう！」元気いっぱいに1日がスタート。好きな遊びを見つけよう！</div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <span class="timeline-emoji">🌿</span>
+        <div class="timeline-time">10:30</div>
+        <div class="timeline-title">おそとあそび</div>
+        <div class="timeline-desc">小金井公園へ出発！泥んこ遊び、虫取り、走り回って全力で遊ぶ！</div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <span class="timeline-emoji">🍙</span>
+        <div class="timeline-time">12:00</div>
+        <div class="timeline-title">おべんとう</div>
+        <div class="timeline-desc">いっぱい遊んだあとはおなかペコペコ。みんなで食べるとおいしいね！</div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <span class="timeline-emoji">💤</span>
+        <div class="timeline-time">13:00</div>
+        <div class="timeline-title">おひるね・自由あそび</div>
+        <div class="timeline-desc">眠たい子はぐっすりおひるね。元気いっぱいの子はそのまま遊んでOK！それぞれのペースで過ごします。</div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <span class="timeline-emoji">👋</span>
+        <div class="timeline-time">14:00</div>
+        <div class="timeline-title">おかえり</div>
+        <div class="timeline-desc">「またね！」今日も楽しかったね。次のこむぎえんも楽しみだね！</div>
+      </div>
+    </div>
+    <p style="text-align:center; font-size:0.82rem; color:var(--text-light); margin-top:24px;">※ 延長保育（17:00まで）もご利用いただけます。お気軽にご相談ください。</p>
+  </div>
+</section>
+
+
+<!-- Daily Life (園の日常) -->
+<section id="handmade" style="background: var(--cream); padding: 90px 24px; overflow: hidden;">
+  <div style="text-align: center; margin-bottom: 50px;" class="reveal">
+    <div class="section-label">Daily Life</div>
+    <h2 class="section-title">園の日常 <span class="emoji">📸</span></h2>
+    <p class="section-desc" style="margin: 0 auto;">先生とお友だちと一緒に、自然のなかでのびのび成長できます。</p>
+  </div>
+
+  <div class="bubble-gallery reveal">
+    <div class="bubble" style="--delay: 0s; --duration: 6s; background: radial-gradient(ellipse at 30% 20%, rgba(232,255,224,0.8) 0%, rgba(232,255,224,0.3) 40%, rgba(232,255,224,0.05) 70%);">
+      <div class="bubble-photo"><img src="images/IMG_7996.JPG" alt="赤帽子の園児たちが緑の小道を元気に走る後ろ姿" loading="lazy"></div>
+      <h3 style="color: var(--deep-green);">おさんぽ大好き</h3>
+      <p>先生と一緒に緑いっぱいの道をお散歩。小金井公園まで歩いてすぐ。道中も虫や花を見つけて大冒険です。</p>
+    </div>
+
+    <div class="bubble" style="--delay: 0.8s; --duration: 7s; background: radial-gradient(ellipse at 30% 20%, rgba(255,240,224,0.8) 0%, rgba(255,240,224,0.3) 40%, rgba(255,240,224,0.05) 70%);">
+      <div class="bubble-photo"><img src="images/IMG_7994.JPG" alt="公園でみんなでおやつを食べる園児たち" loading="lazy"></div>
+      <h3 style="color: var(--bright-orange);">みんなでおやつ</h3>
+      <p>いっぱい遊んだあとは、お外でみんなと一緒におやつタイム。青空の下で食べるとおいしいね！</p>
+    </div>
+
+    <div class="bubble" style="--delay: 0.3s; --duration: 6.5s; background: radial-gradient(ellipse at 30% 20%, rgba(224,244,255,0.8) 0%, rgba(224,244,255,0.3) 40%, rgba(224,244,255,0.05) 70%);">
+      <div class="bubble-photo"><img src="images/IMG_7997.JPG" alt="秋の公園で滑り台を楽しむ園児" loading="lazy"></div>
+      <h3 style="color: #3A9BC7;">公園あそび</h3>
+      <p>小金井公園は遊びの宝庫！滑り台、かけっこ、落ち葉拾い。四季折々の自然のなかで思いっきり体を動かします。</p>
+    </div>
+
+    <div class="bubble" style="--delay: 1.2s; --duration: 7.5s; background: radial-gradient(ellipse at 30% 20%, rgba(255,232,240,0.8) 0%, rgba(255,232,240,0.3) 40%, rgba(255,232,240,0.05) 70%);">
+      <div class="bubble-photo"><img src="images/IMG_7993.JPG" alt="室内でおもちゃ遊びを楽しむ園児たち" loading="lazy"></div>
+      <h3 style="color: #E06080;">室内あそび</h3>
+      <p>雨の日もへっちゃら！おもちゃ、工作、ごっこ遊び。お友だちと一緒なら室内でも楽しさいっぱいです。</p>
+    </div>
+
+    <div class="bubble" style="--delay: 0.6s; --duration: 6.8s; background: radial-gradient(ellipse at 30% 20%, rgba(255,248,224,0.8) 0%, rgba(255,248,224,0.3) 40%, rgba(255,248,224,0.05) 70%);">
+      <div class="bubble-photo"><img src="images/IMG_7995.JPG" alt="秋のコスモスが青空に咲く風景" loading="lazy"></div>
+      <h3 style="color: #D4A017;">季節を感じて</h3>
+      <p>コスモス、銀杏、新緑。四季の移り変わりを肌で感じながら、自然と触れ合う毎日です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Temporary Care (一時預かり) -->
+<section id="temp-care" style="background: var(--cream); padding: 0 24px 60px;">
+  <div class="reveal" style="max-width: 700px; margin: 0 auto; background: var(--white); border-radius: 20px; padding: 28px 32px; display: flex; align-items: center; gap: 24px; box-shadow: 0 2px 16px rgba(0,0,0,0.04); border: 1px solid rgba(255,159,91,0.15);">
+    <img src="images/IMG_7998.JPG" alt="秋の銀杏並木が黄金色に染まる小金井公園" loading="lazy" style="width: 120px; height: 120px; object-fit: cover; border-radius: 16px; flex-shrink: 0;">
+    <div>
+      <h3 style="font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 1rem; font-weight: 800; color: var(--bright-orange); margin-bottom: 6px;">🌻 長期休暇の一時預かりもやっています</h3>
+      <p style="font-size: 0.82rem; color: var(--text-medium); line-height: 1.8; margin: 0;">春休み・夏休み・冬休みなどの長期休暇中も一時預かりを行っています。お気軽にご相談ください。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Voices -->
+<section class="voices" id="voices">
+  <div class="voices-inner">
+    <div class="voices-header reveal">
+      <div class="section-label">Voices</div>
+      <h2 class="section-title">保護者の声 <span class="emoji">💬</span></h2>
+      <p class="section-desc">こむぎえんに通わせている保護者の皆さまからの声をご紹介します。</p>
+    </div>
+
+    <div class="voices-grid">
+      <div class="voice-card reveal">
+        <div class="voice-stars">⭐⭐⭐⭐⭐</div>
+        <div class="voice-text">
+          活発で落ち着きがない息子ですが、先生方が否定せず「元気でいいね！」と受け止めてくれます。この1年で驚くほど成長しました。自然の中で走り回れる環境が息子にぴったりでした。
+        </div>
+        <div class="voice-meta">
+          <div class="voice-avatar">👦</div>
+          <div class="voice-info">
+            <div class="voice-name">2歳男の子のパパ</div>
+            <div class="voice-detail">2025年度入園</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="voice-card reveal" style="transition-delay: 0.15s;">
+        <div class="voice-stars">⭐⭐⭐⭐⭐</div>
+        <div class="voice-text">
+          少人数なので先生の目が行き届いていて安心です。毎回お迎えの時に「今日はこんなことができました」と教えてくれるのが嬉しい。子どもも「こむぎえん行く！」と楽しみにしています。
+        </div>
+        <div class="voice-meta">
+          <div class="voice-avatar">👧</div>
+          <div class="voice-info">
+            <div class="voice-name">2歳女の子のママ</div>
+            <div class="voice-detail">2025年度入園</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="voice-card reveal" style="transition-delay: 0.3s;">
+        <div class="voice-stars">⭐⭐⭐⭐⭐</div>
+        <div class="voice-text">
+          共働きではありませんが、週3日の保育で子どもに集団生活の経験をさせたくて入園しました。泥んこ遊びや虫取りなど、家ではできない体験をたくさんさせてもらっています。
+        </div>
+        <div class="voice-meta">
+          <div class="voice-avatar">🌸</div>
+          <div class="voice-info">
+            <div class="voice-name">2歳男の子のママ</div>
+            <div class="voice-detail">2024年度入園</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Admission -->
+<section class="admission" id="admission">
+  <div class="admission-inner">
+    <div class="admission-header reveal">
+      <div class="section-label">Admission</div>
+      <h2 class="section-title">入園案内・アクセス <span class="emoji">📍</span></h2>
+      <p class="section-desc">見学は随時受付中！お気軽にご連絡ください。</p>
+    </div>
+
+    <table class="info-table reveal">
+      <tr><th>施設名</th><td>こむぎえん（認可外保育施設）<small>2016年開園・10周年</small></td></tr>
+      <tr><th>対象</th><td>2歳児<small>途中入園も大歓迎です！</small></td></tr>
+      <tr><th>定員</th><td>9名（少人数制）<small>保育者2名の手厚い体制です</small></td></tr>
+      <tr><th>保育日</th><td>月曜・水曜・金曜（週3日）<small>土日祝はお休みです</small></td></tr>
+      <tr><th>保育時間</th><td>9:00〜14:00<small>延長保育は17:00まで可能です</small></td></tr>
+      <tr><th>一時預かり</th><td>春休み・夏休み・冬休みの長期休暇中に実施</td></tr>
+      <tr><th>場所</th><td>東京都小平市花小金井2-17-19-3 2号棟101<small>西武新宿線 花小金井駅から徒歩7分</small></td></tr>
+      <tr><th>その他</th><td>保護者様の就業状況に関わらずお預けいただけます<small>各種補助金についてはお住まいの市区町村にお問い合わせください</small></td></tr>
+    </table>
+
+    <!-- 3つの連絡方法 -->
+    <div class="contact-grid reveal" style="grid-template-columns: repeat(3, 1fr);">
+      <a href="tel:042-469-7070" class="contact-card phone" style="text-decoration:none; cursor:pointer;">
+        <div class="label">📞 お電話</div>
+        <div class="value">042-469-7070</div>
+        <div class="sub">携帯：090-1810-9432</div>
+      </a>
+      <a href="mailto:komugi_en@yahoo.co.jp?subject=こむぎえんへのお問い合わせ" class="contact-card email" style="text-decoration:none; cursor:pointer;">
+        <div class="label">✉️ メール</div>
+        <div class="value small">komugi_en@yahoo.co.jp</div>
+        <div class="sub">タップでメール作成</div>
+      </a>
+      <a href="https://www.instagram.com/komugien/" target="_blank" class="contact-card ig" style="text-decoration:none; cursor:pointer;">
+        <div class="label">💬 Instagram DM</div>
+        <div class="value small" style="color:#E1306C;">@komugien</div>
+        <div class="sub">DMでもお気軽にどうぞ</div>
+      </a>
+    </div>
+
+    <!-- 簡単お問い合わせフォーム -->
+    <div class="inquiry-form reveal" id="inquiry">
+      <h3 class="inquiry-title">かんたんお問い合わせ</h3>
+      <p class="inquiry-desc">用件を選んで、お名前と連絡先を入力するだけ！</p>
+      <form id="contactForm" onsubmit="submitInquiry(event)">
+        <div class="inquiry-type-grid">
+          <label class="inquiry-type-btn">
+            <input type="radio" name="type" value="見学希望" checked>
+            <span>👀 見学したい</span>
+          </label>
+          <label class="inquiry-type-btn">
+            <input type="radio" name="type" value="入園相談">
+            <span>🌱 入園の相談</span>
+          </label>
+          <label class="inquiry-type-btn">
+            <input type="radio" name="type" value="一時預かり">
+            <span>🌻 一時預かり</span>
+          </label>
+          <label class="inquiry-type-btn">
+            <input type="radio" name="type" value="その他">
+            <span>💬 その他</span>
+          </label>
+        </div>
+        <div class="inquiry-fields">
+          <input type="text" name="name" placeholder="お名前" required class="inquiry-input">
+          <input type="tel" name="phone" placeholder="電話番号またはメールアドレス" required class="inquiry-input">
+          <textarea name="message" placeholder="メッセージ（任意）" rows="3" class="inquiry-input inquiry-textarea"></textarea>
+        </div>
+        <button type="submit" class="inquiry-submit">送信する ✉️</button>
+        <p class="inquiry-note">※メールアプリが開きます。そのまま送信してください。</p>
+      </form>
+    </div>
+
+    <a href="https://www.instagram.com/komugien/" target="_blank" class="instagram-cta reveal">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      日々のようすを見る（Instagram）
+    </a>
+
+    <div class="map-container reveal">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.5!2d139.517!3d35.723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z44GT44KA44GO44GI44KT!5e0!3m2!1sja!2sjp!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div style="text-align: center; margin-top: 14px;" class="reveal">
+      <p style="font-size: 0.85rem; color: var(--text-medium);">
+        〒187-0002 東京都小平市花小金井2-17-19-3 2号棟101<br>
+        <span style="font-size: 0.78rem; color: var(--text-light);">西武新宿線「花小金井駅」より徒歩圏内</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">🌾 こむぎえん</div>
+  <div class="footer-info">
+    〒187-0002 東京都小平市花小金井2-17-19-3 2号棟101<br>
+    TEL: 042-469-7070 / 090-1810-9432<br>
+    MAIL: komugi_en@yahoo.co.jp
+  </div>
+  <div class="footer-copy">&copy; 2026 こむぎえん All Rights Reserved.</div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
+
+function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => { document.getElementById('navLinks').classList.remove('open'); });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+function submitInquiry(e) {
+  e.preventDefault();
+  const form = document.getElementById('contactForm');
+  const type = form.querySelector('input[name="type"]:checked').value;
+  const name = form.querySelector('input[name="name"]').value;
+  const phone = form.querySelector('input[name="phone"]').value;
+  const message = form.querySelector('textarea[name="message"]').value;
+
+  const subject = encodeURIComponent('【こむぎえん】' + type + 'のお問い合わせ');
+  const body = encodeURIComponent(
+    '■ お問い合わせ内容: ' + type + '\n' +
+    '■ お名前: ' + name + '\n' +
+    '■ 連絡先: ' + phone + '\n' +
+    (message ? '■ メッセージ:\n' + message + '\n' : '') +
+    '\n---\nこむぎえんホームページからのお問い合わせ'
+  );
+
+  window.location.href = 'mailto:komugi_en@yahoo.co.jp?subject=' + subject + '&body=' + body;
+}
+
+// ===== お知らせ読み込み =====
+const NEWS_GAS_URL = 'https://script.google.com/macros/s/AKfycbxvAZ2ElRj4DVmfVvt-SEauNqv52nMQr43i_nHs7LVrrKz_QExFFCn6cM-jg7s-DeHIqA/exec';
+let allNewsExpanded = false;
+
+async function loadPublicNews() {
+  if (!NEWS_GAS_URL) return; // URL未設定なら何もしない
+
+  const section = document.getElementById('news-section');
+  const container = document.getElementById('newsListPublic');
+  const toggle = document.getElementById('newsToggle');
+
+  try {
+    const res = await fetch(NEWS_GAS_URL + '?action=getNews', { redirect: 'follow' });
+    const json = await res.json();
+
+    if (!json.news || json.news.length === 0) {
+      section.style.display = 'none';
+      return;
+    }
+
+    section.style.display = 'block';
+    const categoryClass = { 'お知らせ': 'normal', 'イベント': 'event', '重要': 'important' };
+
+    function renderNews(showAll) {
+      const items = showAll ? json.news : json.news.slice(0, 3);
+      container.innerHTML = items.map(n => {
+        const cls = categoryClass[n.category] || 'normal';
+        return `
+          <div class="news-card ${cls}">
+            <div class="news-card-date">${n.date}</div>
+            <div class="news-card-body">
+              <span class="news-card-badge ${cls}">${n.category}</span>
+              <div class="news-card-title">${escapeHtmlPublic(n.title)}</div>
+              ${n.content ? `<div class="news-card-content">${formatTextPublic(escapeHtmlPublic(n.content))}</div>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (json.news.length > 3) {
+        toggle.style.display = 'block';
+        toggle.textContent = showAll ? '閉じる' : `すべて見る（${json.news.length}件）`;
+      }
+    }
+
+    renderNews(false);
+    window._newsData = json.news;
+    window._renderNews = renderNews;
+  } catch (err) {
+    section.style.display = 'none';
+  }
+}
+
+function toggleNewsExpand() {
+  allNewsExpanded = !allNewsExpanded;
+  if (window._renderNews) window._renderNews(allNewsExpanded);
+}
+
+function escapeHtmlPublic(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function formatTextPublic(text) {
+  text = text.replace(/##(.+?)##/g, '<span class="fmt-heading">$1</span>');
+  text = text.replace(/\{\{(.+?)\}\}/g, '<span class="fmt-large">$1</span>');
+  text = text.replace(/\*\*(.+?)\*\*/g, '<span class="fmt-bold">$1</span>');
+  text = text.replace(/\n/g, '<br>');
+  return text;
+}
+
+// ページ読み込み時にお知らせを取得
+if (NEWS_GAS_URL) {
+  document.addEventListener('DOMContentLoaded', loadPublicNews);
+}
+</script>
+
+</body>
+</html>
