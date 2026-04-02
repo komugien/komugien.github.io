@@ -7,6 +7,8 @@
 
 // ===== 設定 =====
 const SHEET_NEWS = 'お知らせ';
+const SHEET_PHOTOS = '写真設定';
+const PHOTO_FOLDER_NAME = 'こむぎえん写真';
 const ADMIN_PASSWORD = 'komugien2026'; // 管理画面のパスワード
 
 // ===== GET リクエスト（データ取得） =====
@@ -20,6 +22,9 @@ function doGet(e) {
       break;
     case 'getPhotos':
       result = getPhotos(e.parameter.folder);
+      break;
+    case 'getPhotoMap':
+      result = getPhotoMap();
       break;
     default:
       result = { error: '不明なアクション' };
@@ -47,6 +52,9 @@ function doPost(e) {
         break;
       case 'deleteNews':
         result = deleteNews(data.row);
+        break;
+      case 'uploadPhoto':
+        result = uploadPhoto(data);
         break;
       default:
         result = { error: '不明なアクション' };
@@ -144,6 +152,81 @@ function getPhotos(folderId) {
   } catch (e) {
     return { error: e.message, photos: [] };
   }
+}
+
+// ===== 写真アップロード =====
+function uploadPhoto(data) {
+  // base64をデコードしてBlobに変換
+  var imageBlob = Utilities.newBlob(Utilities.base64Decode(data.imageData), 'image/jpeg', data.fileName);
+
+  // 写真フォルダを取得または作成
+  var folders = DriveApp.getFoldersByName(PHOTO_FOLDER_NAME);
+  var folder;
+  if (folders.hasNext()) {
+    folder = folders.next();
+  } else {
+    folder = DriveApp.createFolder(PHOTO_FOLDER_NAME);
+  }
+
+  // 同じスロットの古いファイルがあればゴミ箱へ
+  var existingFiles = folder.getFilesByName(data.fileName);
+  while (existingFiles.hasNext()) {
+    existingFiles.next().setTrashed(true);
+  }
+
+  // 新しいファイルをアップロード
+  var file = folder.createFile(imageBlob);
+  file.setSharing(DriveApp.Access.ANYONE, DriveApp.Permission.VIEW);
+
+  var fileId = file.getId();
+  var fileUrl = 'https://lh3.googleusercontent.com/d/' + fileId;
+
+  // スプレッドシートにマッピングを記録
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(SHEET_PHOTOS);
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_PHOTOS);
+    sheet.getRange('A1:D1').setValues([['スロットID', 'ラベル', 'ファイルID', 'URL']]);
+    var headerRange = sheet.getRange(1, 1, 1, 4);
+    headerRange.setBackground('#3D8B37');
+    headerRange.setFontColor('#FFFFFF');
+    headerRange.setFontWeight('bold');
+  }
+
+  // 既存の行を更新、なければ追加
+  var dataRange = sheet.getDataRange();
+  var values = dataRange.getValues();
+  var found = false;
+  for (var i = 1; i < values.length; i++) {
+    if (values[i][0] === data.slotId) {
+      sheet.getRange(i + 1, 3, 1, 2).setValues([[fileId, fileUrl]]);
+      found = true;
+      break;
+    }
+  }
+  if (!found) {
+    sheet.appendRow([data.slotId, data.slotLabel, fileId, fileUrl]);
+  }
+
+  return { success: true, url: fileUrl };
+}
+
+// ===== 写真マッピング取得 =====
+function getPhotoMap() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(SHEET_PHOTOS);
+  var photoMap = {};
+
+  if (sheet && sheet.getLastRow() > 1) {
+    var data = sheet.getDataRange().getValues();
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][0] && data[i][3]) {
+        photoMap[data[i][0]] = data[i][3];
+      }
+    }
+  }
+
+  return { photoMap: photoMap };
 }
 
 // ===== ヘッダー書式設定 =====
