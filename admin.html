@@ -673,7 +673,7 @@ const CONFIG_KEY = 'komugien_admin_config';
 let CONFIG = loadConfig();
 
 function loadConfig() {
-  const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbxvAZ2ElRj4DVmfVvt-SEauNqv52nMQr43i_nHs7LVrrKz_QExFFCn6cM-jg7s-DeHIqA/exec';
+  const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbyChPmN5cytErZ96kiKKit8OwQVNO_R0GYDn1xQbQUbTlCoWZHNUfI_iMjfLFPIqg97/exec';
   const saved = localStorage.getItem(CONFIG_KEY);
   if (saved) {
     const cfg = JSON.parse(saved);
