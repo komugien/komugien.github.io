@@ -45,7 +45,7 @@
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Thursday", "Friday"],
       "opens": "09:00",
-      "closes": "15:00"
+      "closes": "14:00"
     }
   ],
   "sameAs": [
@@ -53,70 +53,6 @@
   ],
   "image": "https://komugien.github.io/images/IMG_7971.JPG",
   "priceRange": "お問い合わせください"
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "こむぎえんとはどんな保育施設ですか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "こむぎえんは東京都小平市花小金井にある認可外保育施設です。2歳児を対象とした少人数制（定員9名）の家庭的な保育を行っています。「遊育」と小金井公園での自然体験を柱に、子どもの「好き」を一緒に見つけて伸ばす保育を大切にしています。2016年開園で10年の実績があります。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "こむぎえんの対象年齢は何歳ですか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "2歳児が対象です。途中入園も受け付けています。保育者2名の手厚い体制で、一人ひとりに寄り添った保育を行っています。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "こむぎえんの保育日・保育時間を教えてください",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "保育日は月曜・火曜・木曜・金曜の週4日です（土日祝はお休み）。保育時間は9:00〜14:00で、延長保育は17:00まで可能です。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "共働きでなくても入園できますか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "はい、保護者様の就業状況に関わらずお預けいただけます。認可外保育施設のため、就労証明書は不要です。各種補助金についてはお住まいの市区町村にお問い合わせください。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "一時預かりはありますか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "春休み・夏休み・冬休みなどの長期休暇中に一時預かりを実施しています。お気軽にご相談ください。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "こむぎえんの場所・アクセスを教えてください",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "東京都小平市花小金井2-17-19-3 101にあります。西武新宿線 花小金井駅から徒歩7分です。電話番号は042-469-7070です。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "見学はできますか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "はい、見学は随時受付中です。お電話（042-469-7070）、メール（komugi_en@yahoo.co.jp）、またはホームページのお問い合わせフォームからお気軽にご連絡ください。"
-      }
-    }
-  ]
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -649,81 +585,6 @@ section { padding: 90px 24px; }
   border: 1px solid rgba(255,123,58,0.2);
 }
 
-/* ===== VOICES (保護者の声) ===== */
-.voices { background: var(--cream); position: relative; overflow: hidden; }
-
-.voices::before {
-  content: ''; position: absolute; bottom: -80px; left: -80px;
-  width: 250px; height: 250px; border-radius: 50%;
-  background: var(--pale-pink); opacity: 0.15;
-}
-
-.voices-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
-.voices-header { text-align: center; margin-bottom: 50px; }
-.voices-header .section-desc { margin: 0 auto; }
-
-.voices-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-}
-
-.voice-card {
-  background: var(--white); border-radius: 24px; padding: 32px 28px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
-  border: 2px solid transparent;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  position: relative;
-}
-
-.voice-card:nth-child(1) { border-color: rgba(107,191,89,0.15); }
-.voice-card:nth-child(2) { border-color: rgba(255,159,91,0.15); }
-.voice-card:nth-child(3) { border-color: rgba(126,203,240,0.15); }
-
-.voice-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-}
-
-.voice-card::before {
-  content: '\201C'; position: absolute; top: 12px; left: 20px;
-  font-size: 3rem; font-family: Georgia, serif;
-  opacity: 0.1; line-height: 1;
-}
-
-.voice-card:nth-child(1)::before { color: var(--soft-green); }
-.voice-card:nth-child(2)::before { color: var(--soft-orange); }
-.voice-card:nth-child(3)::before { color: var(--sky-blue); }
-
-.voice-stars {
-  display: flex; gap: 2px; margin-bottom: 12px;
-  font-size: 1rem; color: var(--sunny-yellow);
-}
-
-.voice-text {
-  font-size: 0.88rem; color: var(--text-medium);
-  line-height: 1.9; font-weight: 400; margin-bottom: 16px;
-}
-
-.voice-meta {
-  display: flex; align-items: center; gap: 10px;
-}
-
-.voice-avatar {
-  width: 36px; height: 36px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem;
-}
-
-.voice-card:nth-child(1) .voice-avatar { background: linear-gradient(135deg, #E0FFD9, #C8F5BE); }
-.voice-card:nth-child(2) .voice-avatar { background: linear-gradient(135deg, #FFF3E0, #FFE8CC); }
-.voice-card:nth-child(3) .voice-avatar { background: linear-gradient(135deg, #D4EFFF, #B8E4FF); }
-
-.voice-info .voice-name {
-  font-size: 0.8rem; font-weight: 700; color: var(--text-dark);
-}
-.voice-info .voice-detail {
-  font-size: 0.7rem; color: var(--text-light); font-weight: 400;
-}
-
 /* ===== ADMISSION ===== */
 .admission { background: var(--white); }
 
@@ -1015,7 +876,6 @@ footer::before {
   .message-card { padding: 32px 20px; }
   section { padding: 70px 20px; }
   .hero-badges { flex-direction: column; align-items: center; }
-  .voices-grid { grid-template-columns: 1fr; }
   .temp-care-card { grid-template-columns: 1fr; padding: 28px 20px; }
 }
 
@@ -1141,7 +1001,6 @@ footer::before {
       <li><a href="#about">保育方針</a></li>
       <li><a href="#daily">1日のながれ</a></li>
       <li><a href="#handmade">園の日常</a></li>
-      <li><a href="#voices">保護者の声</a></li>
       <li><a href="#admission">入園案内</a></li>
     </ul>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -1386,61 +1245,6 @@ footer::before {
   </div>
 </section>
 
-<!-- Voices -->
-<section class="voices" id="voices">
-  <div class="voices-inner">
-    <div class="voices-header reveal">
-      <div class="section-label">Voices</div>
-      <h2 class="section-title">保護者の声 <span class="emoji">💬</span></h2>
-      <p class="section-desc">こむぎえんに通わせている保護者の皆さまからの声をご紹介します。</p>
-    </div>
-
-    <div class="voices-grid">
-      <div class="voice-card reveal">
-        <div class="voice-stars">⭐⭐⭐⭐⭐</div>
-        <div class="voice-text">
-          活発で落ち着きがない息子ですが、先生方が否定せず「元気でいいね！」と受け止めてくれます。この1年で驚くほど成長しました。自然の中で走り回れる環境が息子にぴったりでした。
-        </div>
-        <div class="voice-meta">
-          <div class="voice-avatar">👦</div>
-          <div class="voice-info">
-            <div class="voice-name">2歳男の子のパパ</div>
-            <div class="voice-detail">2025年度入園</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="voice-card reveal" style="transition-delay: 0.15s;">
-        <div class="voice-stars">⭐⭐⭐⭐⭐</div>
-        <div class="voice-text">
-          少人数なので先生の目が行き届いていて安心です。毎回お迎えの時に「今日はこんなことができました」と教えてくれるのが嬉しい。子どもも「こむぎえん行く！」と楽しみにしています。
-        </div>
-        <div class="voice-meta">
-          <div class="voice-avatar">👧</div>
-          <div class="voice-info">
-            <div class="voice-name">2歳女の子のママ</div>
-            <div class="voice-detail">2025年度入園</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="voice-card reveal" style="transition-delay: 0.3s;">
-        <div class="voice-stars">⭐⭐⭐⭐⭐</div>
-        <div class="voice-text">
-          共働きではありませんが、週4日の保育で子どもに集団生活の経験をさせたくて入園しました。泥んこ遊びや虫取りなど、家ではできない体験をたくさんさせてもらっています。
-        </div>
-        <div class="voice-meta">
-          <div class="voice-avatar">🌸</div>
-          <div class="voice-info">
-            <div class="voice-name">2歳男の子のママ</div>
-            <div class="voice-detail">2024年度入園</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Admission -->
 <section class="admission" id="admission">
   <div class="admission-inner">
@@ -1454,7 +1258,7 @@ footer::before {
       <tr><th>施設名</th><td>こむぎえん（認可外保育施設）<small>2016年開園・10周年</small></td></tr>
       <tr><th>対象</th><td>2歳児<small>途中入園も大歓迎です！</small></td></tr>
       <tr><th>定員</th><td>9名（少人数制）<small>保育者2名の手厚い体制です</small></td></tr>
-      <tr><th>保育日</th><td>月曜・火曜・木曜・金曜（週4日）<small>土日祝はお休みです</small></td></tr>
+      <tr><th>保育日</th><td id="businessDaysCell">月曜・火曜・木曜・金曜（週4日）<small>土日祝はお休みです</small></td></tr>
       <tr><th>保育時間</th><td>9:00〜14:00<small>延長保育は17:00まで可能です</small></td></tr>
       <tr><th>一時預かり</th><td>春休み・夏休み・冬休みの長期休暇中に実施</td></tr>
       <tr><th>場所</th><td>東京都小平市花小金井2-17-19-3 101<small>西武新宿線 花小金井駅から徒歩7分</small></td></tr>
@@ -1577,7 +1381,7 @@ function submitInquiry(e) {
 }
 
 // ===== お知らせ読み込み =====
-const NEWS_GAS_URL = 'https://script.google.com/macros/s/AKfycbyChPmN5cytErZ96kiKKit8OwQVNO_R0GYDn1xQbQUbTlCoWZHNUfI_iMjfLFPIqg97/exec';
+const NEWS_GAS_URL = 'https://script.google.com/macros/s/AKfycbwa5WUQ1JOFXts8EkXRfxtvlWcqDdUmBU46-LbzfV927eyFxJrhAbb0XNLWm6B56i72/exec';
 let allNewsExpanded = false;
 
 async function loadPublicNews() {
@@ -1648,16 +1452,35 @@ function formatTextPublic(text) {
   return text;
 }
 
+// ===== 保育日（営業日）動的読込 =====
+async function loadBusinessDaysPublic() {
+  if (!NEWS_GAS_URL) return;
+  try {
+    const res = await fetch(NEWS_GAS_URL + '?action=getSettings', { redirect: 'follow' });
+    const json = await res.json();
+    const days = (json.settings && json.settings.businessDays) || ['月', '火', '木', '金'];
+    if (days.length === 0) return;
+    const cell = document.getElementById('businessDaysCell');
+    if (!cell) return;
+    const text = days.map(day => day + '曜').join('・') + '（週' + days.length + '日）';
+    const hasWeekend = days.includes('土') || days.includes('日');
+    const subtext = hasWeekend ? '祝日はお休みです' : '土日祝はお休みです';
+    cell.innerHTML = text + '<small>' + subtext + '</small>';
+  } catch (err) {
+    // 通信に失敗した場合は静的表示を維持する。
+  }
+}
+
 // ===== 写真差し替え読み込み =====
 async function loadPhotoReplacements() {
   if (!NEWS_GAS_URL) return;
   try {
-    const res = await fetch(NEWS_GAS_URL + '?action=getPhotoMap', { redirect: 'follow' });
+    const res = await fetch(NEWS_GAS_URL + '?action=getSlotPhotos', { redirect: 'follow' });
     const json = await res.json();
-    if (json.photoMap) {
+    if (json.slots) {
       document.querySelectorAll('[data-slot]').forEach(img => {
-        if (json.photoMap[img.dataset.slot]) {
-          img.src = json.photoMap[img.dataset.slot];
+        if (json.slots[img.dataset.slot]) {
+          img.src = json.slots[img.dataset.slot];
         }
       });
     }
@@ -1668,6 +1491,7 @@ async function loadPhotoReplacements() {
 if (NEWS_GAS_URL) {
   document.addEventListener('DOMContentLoaded', () => {
     loadPublicNews();
+    loadBusinessDaysPublic();
     loadPhotoReplacements();
   });
 }
