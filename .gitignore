@@ -1,3 +1,9 @@
-# Local Netlify folder
+# Legacy local artifacts
 .netlify
 deploy.zip
+
+# Local credentials and overrides
+.clasp.json
+.env
+.env.*
+*.local

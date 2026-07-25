@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
 <title>こむぎえん 管理画面</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -303,81 +305,119 @@ body {
 .news-delete:hover { color: var(--poppy-red); }
 
 /* ===== 写真管理 ===== */
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 16px;
-}
-.photo-slot {
-  border: 3px solid transparent;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s;
+.photo-guide {
   text-align: center;
-  background: #f9f6f1;
+  padding: 20px;
 }
-.photo-slot:active { transform: scale(0.96); }
-.photo-slot.selected {
-  border-color: var(--soft-green);
-  box-shadow: 0 0 0 3px rgba(107, 191, 89, 0.3);
-}
-.photo-slot img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  display: block;
-}
-.photo-slot-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--text-medium);
-  padding: 4px 2px;
-  line-height: 1.3;
-}
-.photo-detail {
-  display: none;
-  margin-top: 16px;
-  padding: 16px;
-  background: #f9f6f1;
-  border-radius: 12px;
-  text-align: center;
-}
-.photo-detail.show { display: block; }
-.photo-detail-label {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: var(--deep-green);
-  margin-bottom: 10px;
-}
-.photo-detail-img {
-  max-width: 100%;
-  max-height: 220px;
-  border-radius: 10px;
-  object-fit: cover;
+.photo-guide-icon {
+  font-size: 3rem;
   margin-bottom: 12px;
 }
-.photo-preview-arrow {
-  font-size: 1.5rem;
-  color: var(--soft-green);
-  margin: 8px 0;
+.photo-guide p {
+  font-size: 0.88rem;
+  color: var(--text-medium);
+  margin-bottom: 16px;
+  line-height: 1.9;
 }
-.photo-select-btn {
-  width: 100%;
-  padding: 14px;
-  background: var(--sky-blue);
+.drive-btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background: #4285f4;
   color: white;
-  border: none;
   border-radius: 12px;
-  font-size: 1rem;
+  text-decoration: none;
   font-weight: 700;
-  font-family: inherit;
-  cursor: pointer;
+  font-size: 1rem;
   transition: background 0.3s;
 }
-.photo-select-btn:hover { background: #5bb8e0; }
+.drive-btn:hover { background: #3367d6; }
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.photo-slot {
+  appearance: none;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: #f6f2eb;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text-dark);
+  font: inherit;
+  text-align: center;
+}
+.photo-slot:hover,
+.photo-slot:focus-visible {
+  border-color: var(--soft-green);
+  outline: none;
+}
+.photo-slot img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+.photo-slot span {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.photo-editor {
+  display: none;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #e8dfd3;
+  text-align: center;
+}
+.photo-editor.show { display: block; }
+.photo-editor img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #f6f2eb;
+  margin: 12px 0;
+}
+.privacy-note {
+  padding: 12px;
+  border-radius: 10px;
+  background: #fff3cd;
+  color: #6b5313;
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+.step-list {
+  text-align: left;
+  margin: 20px 0;
+}
+.step-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  align-items: flex-start;
+}
+.step-num {
+  width: 28px;
+  height: 28px;
+  background: var(--soft-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-text {
+  font-size: 0.88rem;
+  color: var(--text-medium);
+  padding-top: 3px;
+}
 
 /* ===== ステータス ===== */
 .status-msg {
@@ -517,45 +557,39 @@ body {
   <small>お知らせ投稿・写真管理</small>
 </div>
 
-<!-- セットアップ画面（GAS URL未設定時） -->
-<div class="setup-section" id="setupSection">
-  <div class="card">
-    <h3>初期設定</h3>
-    <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 16px;">
-      管理システムのURLを入力してください。<br>
-      <small style="color: var(--text-light);">（Google Apps ScriptのウェブアプリURL）</small>
-    </p>
-    <div class="form-group">
-      <input type="text" id="gasUrlInput" class="form-input" placeholder="https://script.google.com/macros/s/...">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Google Drive 写真フォルダID（任意）</label>
-      <input type="text" id="driveFolderInput" class="form-input" placeholder="フォルダIDを入力">
-    </div>
-    <button class="submit-btn" onclick="saveSetup()">設定を保存</button>
-  </div>
-</div>
-
 <!-- ログイン画面 -->
 <div class="login-section" id="loginSection">
   <h2>🔑 ログイン</h2>
   <p>管理用パスワードを入力してください</p>
-  <input type="password" class="login-input" id="passwordInput" placeholder="パスワード" onkeydown="if(event.key==='Enter')login()">
-  <button class="login-btn" onclick="login()">ログイン</button>
-  <div class="login-error" id="loginError">パスワードが違います</div>
+  <input type="password" class="login-input" id="passwordInput" placeholder="パスワード" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
+  <button class="login-btn" id="loginButton" onclick="login()">ログイン</button>
+  <div class="login-error" id="loginError">ログインできませんでした</div>
 </div>
 
 <!-- メインコンテンツ -->
 <div class="admin-main" id="adminMain">
   <!-- タブ -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('news')">📢 お知らせ</button>
-    <button class="tab-btn" onclick="switchTab('photos')">📷 写真</button>
-    <button class="tab-btn" onclick="switchTab('settings')">⚙️ 設定</button>
+    <button class="tab-btn active" onclick="switchTab('news', this)">📢 お知らせ</button>
+    <button class="tab-btn" onclick="switchTab('photos', this)">📷 写真</button>
+    <button class="tab-btn" onclick="switchTab('settings', this)">⚙️ 設定</button>
   </div>
 
   <!-- お知らせタブ -->
   <div class="tab-content active" id="tab-news">
+    <div class="card">
+      <h3>✨ Geminiで下書きを作る</h3>
+      <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 12px;">
+        今日あったことを短く入力してください。スマートフォンのキーボードにあるマイク入力も使えます。
+      </p>
+      <textarea class="form-textarea" id="aiMemo" maxlength="2000" placeholder="例：今日は小金井公園で落ち葉を集めました。子どもたちは色の違いを見比べていました。"></textarea>
+      <div class="privacy-note" style="margin: 12px 0;">
+        園児の名前、家庭事情、健康・発達に関する情報は入力しないでください。写真はGeminiへ送信されません。
+      </div>
+      <button type="button" class="submit-btn" id="aiDraftButton" onclick="createAiDraft()">下書きを作る</button>
+      <div class="status-msg" id="aiDraftStatus"></div>
+    </div>
+
     <!-- 投稿フォーム -->
     <div class="card">
       <h3>📝 お知らせを投稿</h3>
@@ -574,7 +608,7 @@ body {
         </div>
         <div class="form-group">
           <label class="form-label">タイトル</label>
-          <input type="text" class="form-input" id="newsTitle" placeholder="例：4月の保育予定について" required>
+          <input type="text" class="form-input" id="newsTitle" maxlength="80" placeholder="例：4月の保育予定について" required>
         </div>
         <div class="form-group">
           <label class="form-label">内容</label>
@@ -583,7 +617,7 @@ body {
             <button type="button" class="format-btn" onclick="insertFormat('large')" title="選択した文字を大きくする">🔤 大きい文字</button>
             <button type="button" class="format-btn" onclick="insertFormat('heading')" title="選択した文字を見出しにする">📌 見出し</button>
           </div>
-          <textarea class="form-textarea" id="newsContent" placeholder="お知らせの内容を入力してください" oninput="updatePreview()"></textarea>
+          <textarea class="form-textarea" id="newsContent" maxlength="3000" placeholder="お知らせの内容を入力してください" oninput="updatePreview()"></textarea>
           <div class="format-hint">💡 文字を選択してからボタンを押すと装飾できます</div>
           <div class="preview-area" id="previewArea">
             <div class="preview-label">プレビュー</div>
@@ -607,25 +641,20 @@ body {
   <!-- 写真タブ -->
   <div class="tab-content" id="tab-photos">
     <div class="card">
-      <h3>📷 写真管理</h3>
-      <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 16px;">
-        変えたい写真をタップしてください
+      <h3>📷 サイト写真を変更</h3>
+      <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 12px;">
+        変更したい場所を選び、スマートフォンの写真を指定してください。
       </p>
+      <div class="privacy-note">
+        園児の顔・名前・名札・書類などが写る写真は、掲載許可を確認してから使用してください。
+      </div>
       <div class="photo-grid" id="photoGrid"></div>
-
-      <div class="photo-detail" id="photoDetail">
-        <div class="photo-detail-label" id="photoDetailLabel"></div>
-        <img class="photo-detail-img" id="photoDetailImg">
-        <input type="file" accept="image/*" id="photoFileInput" style="display:none" onchange="handlePhotoSelect(this)">
-        <button class="photo-select-btn" onclick="document.getElementById('photoFileInput').click()">📤 新しい写真を選ぶ</button>
-
-        <div id="photoPreview" style="display:none; margin-top: 12px;">
-          <div class="photo-preview-arrow">↓</div>
-          <div style="font-size: 0.75rem; font-weight: 700; color: var(--soft-green); margin-bottom: 6px;">新しい写真</div>
-          <img class="photo-detail-img" id="photoPreviewImg">
-          <button class="submit-btn" id="photoUploadBtn" onclick="uploadPhoto()">この写真に変更する</button>
-        </div>
-
+      <input type="file" id="photoFileInput" accept="image/jpeg,image/png,image/webp" hidden onchange="handlePhotoSelect(this)">
+      <div class="photo-editor" id="photoEditor">
+        <strong id="photoEditorLabel"></strong>
+        <img id="photoPreviewImage" alt="選択した写真の確認">
+        <button type="button" class="submit-btn" id="photoUploadButton" onclick="uploadSelectedPhoto()">この写真に変更する</button>
+        <button type="button" class="login-btn" onclick="cancelPhotoSelection()" style="margin-top: 8px; background: #eee; color: var(--text-medium);">やめる</button>
         <div class="status-msg" id="photoStatus"></div>
       </div>
     </div>
@@ -634,30 +663,29 @@ body {
   <!-- 設定タブ -->
   <div class="tab-content" id="tab-settings">
     <div class="card">
-      <h3>⚙️ 管理システム設定</h3>
+      <h3>🗓️ 営業日（保育日）</h3>
       <div class="form-group">
-        <label class="form-label">GAS ウェブアプリURL</label>
-        <input type="text" class="form-input" id="settingsGasUrl" placeholder="https://script.google.com/macros/s/...">
+        <label class="form-label">HPに表示する保育日（チェックを入れた曜日が「○曜・○曜（週N日）」として表示されます）</label>
+        <div id="businessDayCheckboxes" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 8px;">
+          <label style="display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px; background:#f5f5f5; border-radius:8px; cursor:pointer;"><input type="checkbox" value="月"><span>月</span></label>
+          <label style="display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px; background:#f5f5f5; border-radius:8px; cursor:pointer;"><input type="checkbox" value="火"><span>火</span></label>
+          <label style="display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px; background:#f5f5f5; border-radius:8px; cursor:pointer;"><input type="checkbox" value="水"><span>水</span></label>
+          <label style="display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px; background:#f5f5f5; border-radius:8px; cursor:pointer;"><input type="checkbox" value="木"><span>木</span></label>
+          <label style="display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px; background:#f5f5f5; border-radius:8px; cursor:pointer;"><input type="checkbox" value="金"><span>金</span></label>
+          <label style="display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px; background:#f5f5f5; border-radius:8px; cursor:pointer;"><input type="checkbox" value="土"><span>土</span></label>
+          <label style="display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px; background:#f5f5f5; border-radius:8px; cursor:pointer;"><input type="checkbox" value="日"><span>日</span></label>
+        </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Google Drive 写真フォルダID</label>
-        <input type="text" class="form-input" id="settingsDriveFolder" placeholder="フォルダIDを入力">
-      </div>
-      <div class="form-group">
-        <label class="form-label">管理パスワード変更</label>
-        <input type="text" class="form-input" id="settingsPassword" placeholder="新しいパスワード">
-        <small style="color: var(--text-light); font-size: 0.75rem;">※ GASのコード側も変更が必要です</small>
-      </div>
-      <button class="submit-btn" onclick="saveSettings()">設定を保存</button>
-      <div class="status-msg" id="settingsStatus"></div>
+      <button class="submit-btn" onclick="saveBusinessDays()">営業日を保存</button>
+      <div class="status-msg" id="businessDaysStatus"></div>
     </div>
 
     <div class="card">
       <h3>🔗 よく使うリンク</h3>
       <div style="display: flex; flex-direction: column; gap: 10px;">
-        <a href="https://app.netlify.com/" target="_blank" style="display: block; padding: 14px 16px; background: #00ad9f; color: white; border-radius: 10px; text-decoration: none; font-weight: 700; text-align: center;">Netlify管理画面</a>
-        <a id="sheetLink" href="#" target="_blank" style="display: block; padding: 14px 16px; background: #0f9d58; color: white; border-radius: 10px; text-decoration: none; font-weight: 700; text-align: center;">Googleスプレッドシート</a>
+        <a href="https://docs.google.com/spreadsheets/d/1lteAgD_ABZgKDRbOLz_uw9MU6EAQ231IH6WE8yEx8Ik/edit" target="_blank" rel="noopener" style="display: block; padding: 14px 16px; background: #0f9d58; color: white; border-radius: 10px; text-decoration: none; font-weight: 700; text-align: center;">Googleスプレッドシート</a>
         <a href="/" style="display: block; padding: 14px 16px; background: var(--soft-green); color: white; border-radius: 10px; text-decoration: none; font-weight: 700; text-align: center;">サイトを見る</a>
+        <button type="button" class="submit-btn" onclick="logout()" style="background: var(--earth-brown);">ログアウト</button>
       </div>
     </div>
   </div>
@@ -669,84 +697,82 @@ body {
 
 <script>
 // ===== 設定 =====
-const CONFIG_KEY = 'komugien_admin_config';
-let CONFIG = loadConfig();
-
-function loadConfig() {
-  const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbyChPmN5cytErZ96kiKKit8OwQVNO_R0GYDn1xQbQUbTlCoWZHNUfI_iMjfLFPIqg97/exec';
-  const saved = localStorage.getItem(CONFIG_KEY);
-  if (saved) {
-    const cfg = JSON.parse(saved);
-    // 古い仮URLが残っている場合は正しいURLに置き換え
-    if (cfg.gasUrl.includes('/demo')) {
-      cfg.gasUrl = DEFAULT_GAS_URL;
-      localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
-    }
-    return cfg;
-  }
-  return {
-    gasUrl: DEFAULT_GAS_URL,
-    driveFolderId: '',
-    password: 'komugien2026'
-  };
-}
-
-function saveConfig() {
-  localStorage.setItem(CONFIG_KEY, JSON.stringify(CONFIG));
-}
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwa5WUQ1JOFXts8EkXRfxtvlWcqDdUmBU46-LbzfV927eyFxJrhAbb0XNLWm6B56i72/exec';
+let authToken = '';
 
 // ===== 初期化 =====
 window.addEventListener('DOMContentLoaded', () => {
   // 今日の日付をセット
   document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
-
-  if (!CONFIG.gasUrl) {
-    // GAS URL未設定 → セットアップ画面
-    document.getElementById('loginSection').style.display = 'none';
-    document.getElementById('setupSection').style.display = 'block';
-  } else {
-    // URL設定済み → ログイン画面へ（セットアップスキップ）
-    document.getElementById('setupSection').style.display = 'none';
-  }
 });
 
-// ===== セットアップ =====
-function saveSetup() {
-  const gasUrl = document.getElementById('gasUrlInput').value.trim();
-  if (!gasUrl) {
-    alert('GASのURLを入力してください');
-    return;
+async function postApi(payload, includeToken = true) {
+  const body = includeToken ? { ...payload, token: authToken } : payload;
+  const response = await fetch(GAS_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(body),
+    redirect: 'follow'
+  });
+  const result = await response.json();
+  if (!response.ok || result.error) {
+    if (result.code === 'AUTH_EXPIRED') showLogin();
+    throw new Error(result.error || '通信に失敗しました');
   }
-  CONFIG.gasUrl = gasUrl;
-  CONFIG.driveFolderId = document.getElementById('driveFolderInput').value.trim();
-  saveConfig();
-  document.getElementById('setupSection').style.display = 'none';
-  document.getElementById('loginSection').style.display = 'block';
+  return result;
 }
 
 // ===== ログイン =====
-function login() {
+async function login() {
   const pw = document.getElementById('passwordInput').value;
-  if (pw === CONFIG.password) {
+  const button = document.getElementById('loginButton');
+  const error = document.getElementById('loginError');
+  if (!pw) return;
+  button.disabled = true;
+  button.textContent = '確認中...';
+  error.style.display = 'none';
+  try {
+    const result = await postApi({ action: 'login', password: pw }, false);
+    authToken = result.token;
+    document.getElementById('passwordInput').value = '';
     document.getElementById('loginSection').style.display = 'none';
     document.getElementById('adminMain').style.display = 'block';
     loadSettings();
     loadNews();
     initPhotoGrid();
-  } else {
-    document.getElementById('loginError').style.display = 'block';
+  } catch (err) {
+    error.textContent = err.message;
+    error.style.display = 'block';
     document.getElementById('passwordInput').value = '';
     setTimeout(() => {
-      document.getElementById('loginError').style.display = 'none';
+      error.style.display = 'none';
     }, 3000);
+  } finally {
+    button.disabled = false;
+    button.textContent = 'ログイン';
   }
 }
 
+function showLogin() {
+  authToken = '';
+  document.getElementById('adminMain').style.display = 'none';
+  document.getElementById('loginSection').style.display = 'block';
+}
+
+async function logout() {
+  try {
+    if (authToken) await postApi({ action: 'logout' });
+  } catch (err) {
+    // セッションが失効済みでも、画面側はログアウトする。
+  }
+  showLogin();
+}
+
 // ===== タブ切り替え =====
-function switchTab(tab) {
+function switchTab(tab, button) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  event.target.classList.add('active');
+  button.classList.add('active');
   document.getElementById('tab-' + tab).classList.add('active');
 }
 
@@ -756,6 +782,38 @@ function selectCategory(btn) {
   document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   selectedCategory = btn.dataset.cat;
+}
+
+async function createAiDraft() {
+  const memo = document.getElementById('aiMemo').value.trim();
+  const button = document.getElementById('aiDraftButton');
+  const status = document.getElementById('aiDraftStatus');
+  if (!memo) {
+    status.textContent = '今日あったことを入力してください';
+    status.className = 'status-msg error';
+    return;
+  }
+  button.disabled = true;
+  button.textContent = '作成中...';
+  status.style.display = 'none';
+  try {
+    const result = await postApi({ action: 'draftNews', memo });
+    document.getElementById('newsTitle').value = result.draft.title;
+    document.getElementById('newsContent').value = result.draft.content;
+    const categoryMap = { 'お知らせ': 'normal', 'イベント': 'event', '重要': 'important' };
+    const categoryButton = document.querySelector('.category-btn[data-cat="' + (categoryMap[result.draft.category] || 'normal') + '"]');
+    if (categoryButton) selectCategory(categoryButton);
+    updatePreview();
+    status.textContent = '下書きを作りました。内容を確認してから投稿してください';
+    status.className = 'status-msg success';
+    document.getElementById('newsForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (err) {
+    status.textContent = 'エラー: ' + err.message;
+    status.className = 'status-msg error';
+  } finally {
+    button.disabled = false;
+    button.textContent = '下書きを作る';
+  }
 }
 
 // ===== お知らせ投稿 =====
@@ -773,7 +831,6 @@ async function submitNews(e) {
 
   const data = {
     action: 'addNews',
-    password: CONFIG.password,
     title: document.getElementById('newsTitle').value,
     content: document.getElementById('newsContent').value,
     category: categoryMap[selectedCategory],
@@ -781,12 +838,7 @@ async function submitNews(e) {
   };
 
   try {
-    const res = await fetch(CONFIG.gasUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(data),
-      redirect: 'follow'
-    });
+    await postApi(data);
 
     status.textContent = '投稿しました！';
     status.className = 'status-msg success';
@@ -811,15 +863,10 @@ async function submitNews(e) {
 async function loadNews() {
   const container = document.getElementById('newsList');
 
-  if (!CONFIG.gasUrl) {
-    container.innerHTML = '<p style="text-align:center; color:var(--text-light); font-size:0.85rem;">GASのURLが設定されていません</p>';
-    return;
-  }
-
   container.innerHTML = '<div class="loading">読み込み中</div>';
 
   try {
-    const res = await fetch(CONFIG.gasUrl + '?action=getNews', { redirect: 'follow' });
+    const res = await fetch(GAS_URL + '?action=getNews', { redirect: 'follow' });
     const json = await res.json();
 
     if (!json.news || json.news.length === 0) {
@@ -852,48 +899,54 @@ async function deleteNews(row, btn) {
   btn.textContent = '処理中...';
 
   try {
-    await fetch(CONFIG.gasUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        action: 'deleteNews',
-        password: CONFIG.password,
-        row: row
-      }),
-      redirect: 'follow'
-    });
+    await postApi({ action: 'deleteNews', row });
     loadNews();
   } catch (err) {
-    alert('エラーが発生しました');
+    alert(err.message);
     btn.textContent = '削除';
   }
 }
 
 // ===== 設定 =====
 function loadSettings() {
-  document.getElementById('settingsGasUrl').value = CONFIG.gasUrl || '';
-  document.getElementById('settingsDriveFolder').value = CONFIG.driveFolderId || '';
+  loadBusinessDays();
 }
 
-function saveSettings() {
-  const status = document.getElementById('settingsStatus');
-  CONFIG.gasUrl = document.getElementById('settingsGasUrl').value.trim();
-  CONFIG.driveFolderId = document.getElementById('settingsDriveFolder').value.trim();
-  const newPw = document.getElementById('settingsPassword').value.trim();
-  if (newPw) CONFIG.password = newPw;
-  saveConfig();
-  updateDriveLink();
-  status.textContent = '設定を保存しました';
-  status.className = 'status-msg success';
-  setTimeout(() => { status.style.display = 'none'; }, 3000);
+// ===== 営業日（保育日）読込 =====
+async function loadBusinessDays() {
+  try {
+    const res = await fetch(GAS_URL + '?action=getSettings', { redirect: 'follow' });
+    const json = await res.json();
+    const days = (json.settings && json.settings.businessDays) || ['月', '火', '木', '金'];
+    document.querySelectorAll('#businessDayCheckboxes input[type=checkbox]').forEach(cb => {
+      cb.checked = days.indexOf(cb.value) >= 0;
+    });
+  } catch (err) {
+    console.error('営業日読込エラー', err);
+  }
 }
 
-function updateDriveLink() {
-  const link = document.getElementById('driveLink');
-  if (CONFIG.driveFolderId) {
-    link.href = 'https://drive.google.com/drive/folders/' + CONFIG.driveFolderId;
-  } else {
-    link.href = 'https://drive.google.com/';
+// ===== 営業日（保育日）保存 =====
+async function saveBusinessDays() {
+  const status = document.getElementById('businessDaysStatus');
+  const checked = Array.from(document.querySelectorAll('#businessDayCheckboxes input[type=checkbox]:checked')).map(cb => cb.value);
+  if (checked.length === 0) {
+    status.textContent = '少なくとも1つの曜日を選んでください';
+    status.className = 'status-msg error';
+    return;
+  }
+  status.textContent = '保存中...';
+  status.className = 'status-msg';
+  try {
+    await postApi({
+      action: 'saveSettings',
+      settings: { businessDays: checked }
+    });
+    status.textContent = '保存しました。HPに反映されます（再読込で確認可）';
+    status.className = 'status-msg success';
+  } catch (err) {
+    status.textContent = 'エラー: ' + err.message;
+    status.className = 'status-msg error';
   }
 }
 
@@ -958,139 +1011,136 @@ function formatText(text) {
 
 // ===== 写真管理 =====
 const PHOTO_SLOTS = [
-  { id: 'hero', label: 'トップ画像', img: 'images/IMG_7972.JPG' },
-  { id: 'feature1', label: '遊びきる', img: 'images/IMG_7971.JPG' },
-  { id: 'feature2', label: '好きを見つける', img: 'images/IMG_7992.JPG' },
-  { id: 'feature3', label: '自然が遊び場', img: 'images/IMG_7973.JPG' },
-  { id: 'policy1', label: '遊育', img: 'images/IMG_7974.JPG' },
-  { id: 'policy2', label: '居場所づくり', img: 'images/IMG_7975.JPG' },
-  { id: 'bubble1', label: 'おさんぽ大好き', img: 'images/IMG_7996.JPG' },
-  { id: 'bubble2', label: 'みんなでおやつ', img: 'images/IMG_7994.JPG' },
-  { id: 'bubble3', label: '公園あそび', img: 'images/IMG_7997.JPG' },
-  { id: 'bubble4', label: '室内あそび', img: 'images/IMG_7993.JPG' },
-  { id: 'bubble5', label: '季節を感じて', img: 'images/IMG_7995.JPG' },
-  { id: 'temporary', label: '一時預かり', img: 'images/IMG_7998.JPG' },
+  { id: 'hero', label: 'トップ画像', image: 'images/IMG_7972.JPG' },
+  { id: 'feature1', label: '遊びきる', image: 'images/IMG_7971.JPG' },
+  { id: 'feature2', label: '好きを見つける', image: 'images/IMG_7992.JPG' },
+  { id: 'feature3', label: '自然が遊び場', image: 'images/IMG_7973.JPG' },
+  { id: 'policy1', label: '遊育', image: 'images/IMG_7974.JPG' },
+  { id: 'policy2', label: '居場所づくり', image: 'images/IMG_7975.JPG' },
+  { id: 'bubble1', label: 'おさんぽ', image: 'images/IMG_7996.JPG' },
+  { id: 'bubble2', label: 'おやつ', image: 'images/IMG_7994.JPG' },
+  { id: 'bubble3', label: '公園あそび', image: 'images/IMG_7997.JPG' },
+  { id: 'bubble4', label: '室内あそび', image: 'images/IMG_7993.JPG' },
+  { id: 'bubble5', label: '季節の活動', image: 'images/IMG_7995.JPG' },
+  { id: 'temporary', label: '一時預かり', image: 'images/IMG_7998.JPG' }
 ];
-
-let selectedSlot = null;
-let photoFile = null;
+let selectedPhotoSlot = null;
+let selectedPhotoDataUrl = '';
 
 function initPhotoGrid() {
   const grid = document.getElementById('photoGrid');
   grid.innerHTML = PHOTO_SLOTS.map(slot => `
-    <div class="photo-slot" data-slot="${slot.id}" onclick="selectPhotoSlot('${slot.id}')">
-      <img src="${slot.img}" id="slot-img-${slot.id}">
-      <div class="photo-slot-label">${slot.label}</div>
-    </div>
+    <button type="button" class="photo-slot" onclick="choosePhotoSlot('${slot.id}')">
+      <img id="photo-slot-${slot.id}" src="${slot.image}" alt="${slot.label}">
+      <span>${slot.label}</span>
+    </button>
   `).join('');
-
-  // GASから差し替え済み写真を読み込み
   loadPhotoOverrides();
 }
 
 async function loadPhotoOverrides() {
-  if (!CONFIG.gasUrl) return;
   try {
-    const res = await fetch(CONFIG.gasUrl + '?action=getPhotoMap', { redirect: 'follow' });
-    const json = await res.json();
-    if (json.photoMap) {
-      Object.keys(json.photoMap).forEach(slotId => {
-        const img = document.getElementById('slot-img-' + slotId);
-        if (img) img.src = json.photoMap[slotId];
-      });
-    }
-  } catch (e) { /* デフォルト画像のまま */ }
-}
-
-function selectPhotoSlot(slotId) {
-  selectedSlot = PHOTO_SLOTS.find(s => s.id === slotId);
-  document.querySelectorAll('.photo-slot').forEach(el => el.classList.remove('selected'));
-  document.querySelector(`[data-slot="${slotId}"]`).classList.add('selected');
-
-  document.getElementById('photoDetail').classList.add('show');
-  document.getElementById('photoDetailLabel').textContent = '「' + selectedSlot.label + '」の写真';
-  document.getElementById('photoDetailImg').src = document.getElementById('slot-img-' + slotId).src;
-  document.getElementById('photoPreview').style.display = 'none';
-  document.getElementById('photoFileInput').value = '';
-  document.getElementById('photoStatus').className = 'status-msg';
-  document.getElementById('photoStatus').style.display = 'none';
-}
-
-function handlePhotoSelect(input) {
-  if (!input.files[0]) return;
-  photoFile = input.files[0];
-  const img = document.getElementById('photoPreviewImg');
-  img.src = URL.createObjectURL(photoFile);
-  document.getElementById('photoPreview').style.display = 'block';
-}
-
-async function uploadPhoto() {
-  if (!selectedSlot || !photoFile) return;
-
-  const btn = document.getElementById('photoUploadBtn');
-  const status = document.getElementById('photoStatus');
-  btn.disabled = true;
-  btn.textContent = 'アップロード中...';
-  status.className = 'status-msg';
-  status.style.display = 'none';
-
-  try {
-    const base64 = await compressAndEncode(photoFile);
-
-    const res = await fetch(CONFIG.gasUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        action: 'uploadPhoto',
-        password: CONFIG.password,
-        slotId: selectedSlot.id,
-        slotLabel: selectedSlot.label,
-        imageData: base64,
-        fileName: selectedSlot.id + '.jpg'
-      }),
-      redirect: 'follow'
+    const response = await fetch(GAS_URL + '?action=getSlotPhotos', { redirect: 'follow' });
+    const result = await response.json();
+    Object.entries(result.slots || {}).forEach(([slotId, url]) => {
+      const image = document.getElementById('photo-slot-' + slotId);
+      if (image) image.src = url;
     });
+  } catch (err) {
+    // 通信に失敗しても、リポジトリ内の既定写真は表示できる。
+  }
+}
 
-    const result = await res.json();
+function choosePhotoSlot(slotId) {
+  selectedPhotoSlot = PHOTO_SLOTS.find(slot => slot.id === slotId) || null;
+  if (!selectedPhotoSlot) return;
+  document.getElementById('photoFileInput').click();
+}
 
-    if (result.success) {
-      // グリッドのサムネイルも更新
-      document.getElementById('slot-img-' + selectedSlot.id).src = result.url;
-      document.getElementById('photoDetailImg').src = result.url;
+async function handlePhotoSelect(input) {
+  const file = input.files && input.files[0];
+  if (!file || !selectedPhotoSlot) return;
+  const status = document.getElementById('photoStatus');
+  status.style.display = 'none';
+  try {
+    selectedPhotoDataUrl = await compressPhoto(file);
+    document.getElementById('photoEditorLabel').textContent = '「' + selectedPhotoSlot.label + '」の新しい写真';
+    document.getElementById('photoPreviewImage').src = selectedPhotoDataUrl;
+    document.getElementById('photoEditor').classList.add('show');
+    document.getElementById('photoEditor').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } catch (err) {
+    status.textContent = '写真を読み込めませんでした';
+    status.className = 'status-msg error';
+  }
+}
 
-      status.textContent = '写真を変更しました！';
-      status.className = 'status-msg success';
-      document.getElementById('photoPreview').style.display = 'none';
-    } else {
-      throw new Error(result.error || '不明なエラー');
+function compressPhoto(file, maxWidth = 1200) {
+  return new Promise((resolve, reject) => {
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      reject(new Error('対応していない画像形式です'));
+      return;
     }
+    const image = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    image.onload = () => {
+      try {
+        let width = image.width;
+        let height = image.height;
+        if (width > maxWidth) {
+          height = Math.round(height * maxWidth / width);
+          width = maxWidth;
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+        URL.revokeObjectURL(objectUrl);
+        resolve(canvas.toDataURL('image/jpeg', 0.85));
+      } catch (err) {
+        URL.revokeObjectURL(objectUrl);
+        reject(err);
+      }
+    };
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error('画像を読み込めませんでした'));
+    };
+    image.src = objectUrl;
+  });
+}
+
+async function uploadSelectedPhoto() {
+  if (!selectedPhotoSlot || !selectedPhotoDataUrl) return;
+  const button = document.getElementById('photoUploadButton');
+  const status = document.getElementById('photoStatus');
+  button.disabled = true;
+  button.textContent = '変更中...';
+  status.style.display = 'none';
+  try {
+    const result = await postApi({
+      action: 'uploadSlotPhoto',
+      slot: selectedPhotoSlot.id,
+      dataUrl: selectedPhotoDataUrl
+    });
+    document.getElementById('photo-slot-' + selectedPhotoSlot.id).src = result.url;
+    status.textContent = '写真を変更しました';
+    status.className = 'status-msg success';
+    selectedPhotoDataUrl = '';
+    document.getElementById('photoFileInput').value = '';
   } catch (err) {
     status.textContent = 'エラー: ' + err.message;
     status.className = 'status-msg error';
+  } finally {
+    button.disabled = false;
+    button.textContent = 'この写真に変更する';
   }
-
-  btn.disabled = false;
-  btn.textContent = 'この写真に変更する';
 }
 
-async function compressAndEncode(file, maxWidth = 1200) {
-  return new Promise(resolve => {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-    img.onload = () => {
-      let w = img.width, h = img.height;
-      if (w > maxWidth) {
-        h = Math.round((h * maxWidth) / w);
-        w = maxWidth;
-      }
-      canvas.width = w;
-      canvas.height = h;
-      ctx.drawImage(img, 0, 0, w, h);
-      resolve(canvas.toDataURL('image/jpeg', 0.85).split(',')[1]);
-    };
-    img.src = URL.createObjectURL(file);
-  });
+function cancelPhotoSelection() {
+  selectedPhotoSlot = null;
+  selectedPhotoDataUrl = '';
+  document.getElementById('photoFileInput').value = '';
+  document.getElementById('photoEditor').classList.remove('show');
 }
 
 // ===== ユーティリティ =====
