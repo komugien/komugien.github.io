@@ -14,7 +14,7 @@ const PROP_GEMINI_API_KEY = 'GEMINI_API_KEY';
 const PROP_SLOT_FOLDER_ID = 'SLOT_FOLDER_ID';
 const SLOT_FOLDER_NAME = 'こむぎえん_HP写真スロット';
 const AUTH_TOKEN_TTL_SECONDS = 21600;
-const GEMINI_MODEL = 'gemini-2.5-flash-lite';
+const GEMINI_MODEL = 'gemini-3.1-flash-lite';
 const PHOTO_SLOT_IDS = [
   'hero', 'feature1', 'feature2', 'feature3', 'policy1', 'policy2',
   'bubble1', 'bubble2', 'bubble3', 'bubble4', 'bubble5', 'temporary'
@@ -147,17 +147,21 @@ function createNewsDraft_(memo) {
   if (!apiKey) throw new Error('AI下書き機能は準備中です');
 
   const instruction = [
-    'あなたは東京都小平市花小金井の小規模保育施設「こむぎえん」の投稿補助です。',
-    '入力されたメモに書かれた事実だけを使い、保護者向けのお知らせ下書きを作ってください。',
+    'タスク: 東京都小平市花小金井の小規模保育施設「こむぎえん」の保護者向けお知らせ下書きを作成します。',
+    '下の <teacher_memo> 内には先生が入力した今日の出来事が必ず入っています。',
+    'メモが空だと判断したり、追加入力を求めたりせず、書かれている出来事を分かりやすく整えてください。',
+    'メモに書かれた事実だけを使ってください。',
     '園児の実名、家庭事情、健康・発達情報は出力しないでください。',
     '人数、日付、子どもの発言、成長効果、先生の感情を推測で追加しないでください。',
+    'メモにない季節、活動目的、活動の評価、今後の方針、保護者へのお願いを追加しないでください。',
+    'メモの情報が少ないときは文章を短くし、文字数を増やすための事実や定型挨拶を足さないでください。',
     '誇張した宣伝、絵文字の多用、検索キーワードの不自然な反復を避けてください。',
-    'titleは40文字以内、contentは150〜350文字程度にします。',
+    'titleは40文字以内、contentは80〜300文字程度にします。',
     'categoryは「お知らせ」「イベント」「重要」のどれかにします。',
-    '説明文やMarkdownを付けず、{"title":"...","content":"...","category":"..."} のJSONだけを返してください。',
     '',
-    '先生のメモ:',
-    sourceMemo
+    '<teacher_memo>',
+    sourceMemo,
+    '</teacher_memo>'
   ].join('\n');
 
   const response = UrlFetchApp.fetch(
@@ -169,17 +173,49 @@ function createNewsDraft_(memo) {
       payload: JSON.stringify({
         contents: [{ role: 'user', parts: [{ text: instruction }] }],
         generationConfig: {
-          temperature: 0.2,
-          responseMimeType: 'application/json'
+          responseMimeType: 'application/json',
+          responseJsonSchema: {
+            type: 'object',
+            properties: {
+              title: {
+                type: 'string',
+                description: '先生のメモにある具体的な出来事が分かる、40文字以内の日本語タイトル'
+              },
+              content: {
+                type: 'string',
+                description: '先生のメモの事実だけを自然な日本語に整えた、80〜300文字程度の保護者向け本文。メモにない季節・評価・今後の方針は追加しない'
+              },
+              category: {
+                type: 'string',
+                enum: ['お知らせ', 'イベント', '重要']
+              }
+            },
+            required: ['title', 'content', 'category'],
+            additionalProperties: false
+          }
         }
       }),
       muteHttpExceptions: true
     }
   );
 
-  if (response.getResponseCode() < 200 || response.getResponseCode() >= 300) {
-    console.error('Gemini API error: ' + response.getResponseCode());
-    throw new Error('AI下書きを作成できませんでした');
+  const responseCode = response.getResponseCode();
+  if (responseCode < 200 || responseCode >= 300) {
+    let providerMessage = '';
+    try {
+      const errorBody = JSON.parse(response.getContentText());
+      providerMessage = errorBody && errorBody.error && errorBody.error.message
+        ? String(errorBody.error.message)
+        : '';
+    } catch (err) {
+      providerMessage = '';
+    }
+    providerMessage = providerMessage.replace(apiKey, '[redacted]').slice(0, 300);
+    console.error('Gemini API error: ' + responseCode + (providerMessage ? ' - ' + providerMessage : ''));
+    throw new Error(
+      'AI下書きを作成できませんでした（Gemini API: ' + responseCode +
+      (providerMessage ? ' - ' + providerMessage : '') + '）'
+    );
   }
 
   const body = JSON.parse(response.getContentText());
@@ -200,6 +236,10 @@ function createNewsDraft_(memo) {
 
   const title = requireText_(draft.title, 'AI下書きのタイトル', 80);
   const content = requireText_(draft.content, 'AI下書きの内容', 1000);
+  if (/メモ.*(?:入力|提示)|タイトル.*入力/.test(title) ||
+      /メモ.*(?:入力|提示).*(?:ください|願)/.test(content)) {
+    throw new Error('AI下書きが先生のメモを反映しませんでした。もう一度お試しください');
+  }
   const allowedCategories = ['お知らせ', 'イベント', '重要'];
   const category = allowedCategories.indexOf(draft.category) >= 0 ? draft.category : 'お知らせ';
   return { success: true, draft: { title, content, category } };
