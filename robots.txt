@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://komugien.github.io/sitemap.xml
+Sitemap: https://komugien.com/sitemap.xml

@@ -1,6 +1,6 @@
 # 独自ドメイン移行チェックリスト
 
-独自ドメインが決まるまでは `https://komugien.github.io/` を正規URLとして維持する。
+正規URLは `https://komugien.com/` とする。旧GitHub Pages URLは独自ドメインへ転送する。
 
 ## 第一候補
 
